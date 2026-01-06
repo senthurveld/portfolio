@@ -1,0 +1,12 @@
+.squares-canvas {
+  position: fixed; /* makes it background */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 0; /* background layer */
+  pointer-events: auto; /* allow clicks through */
+
+  display: block;
+}

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+.bg-global {
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(226, 226, 226, 0.91);
+  z-index: -10;
+}
+
+/* Hero Section */
+
+.logo-heading {
+  font-family: "DotGothic16", sans-serif;
+}
+
+.text-bg-type {
+  background-color: rgba(12, 124, 235, 0.882);
+}
+.sub-hightlight:hover{
+  color: #0361a4;
+  cursor: pointer;
+}
+/* Responsive Code  */
+/* Hero Section */
+@media screen and (max-width: 480px) {
+  .hero-sec {
+    display: flex ;
+  }
+  .pp-img {
+    display: inline-block;
+  }
+  .pp-img img{
+    height: 190px;
+    border-radius: 20px;
+  }
+}
+
+
+/* animation */
+.fade-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  animation: fadeLeft 0.8s ease forwards;
+}
+
+.fade-right {
+  opacity: 0;
+  transform: translateX(40px);
+  animation: fadeRight 0.8s ease forwards;
+}
+
+@keyframes fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

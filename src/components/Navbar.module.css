@@ -1,0 +1,9 @@
+.navlink li a:hover {
+  color: #0361a4;
+  text-shadow: 0 0 25px rgb(8, 8, 255);
+}
+
+.sub :hover {
+  color: #0361a4;
+  text-shadow: 0 0 25px rgb(142, 142, 252);
+}
