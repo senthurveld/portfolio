@@ -50,12 +50,12 @@ const projects = [
 
 export const ProjectsRow = () => {
   return (
-    <section className="py-12 mt-10 mb-20" id="projects">
+    <section className="py-12 mt-10 mb-20 " id="projects">
       <h2 className="text-5xl font-extrabold text-center mt-0 mb-25 title-h1">
         MY PROJECTS
       </h2>
 
-      <div className="flex gap-6 overflow-x-auto pb-4 scroll-bar">
+      <div className="flex gap-6 overflow-x-auto pb-4 fade-up">
         {projects.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}

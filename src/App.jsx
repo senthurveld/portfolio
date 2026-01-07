@@ -5,6 +5,7 @@ import { HeroSection } from "./components/HeroSection";
 import ClickSpark from "./components/ClickSpark";
 import { Skills } from "./components/Skills";
 import { ProjectsRow } from "./components/Projects";
+import { Contact } from "./components/Contact";
 export const App = () => {
   return (
     <>
@@ -21,6 +22,7 @@ export const App = () => {
           <HeroSection />
           <Skills />
           <ProjectsRow />
+          <Contact />
         </div>
       </ClickSpark>
     </>
