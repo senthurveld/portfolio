@@ -29,28 +29,44 @@ export const HeroSection = () => {
           frontend tools.
         </p>
         <div className="flex gap-6 mt-20 ml-2 pp-icons">
-          <a href="" className="pp-icons">
+          <a href="#contact" className="pp-icons">
             <Mail
               className="hover:stroke-blue-500"
               size={26}
               strokeWidth={1.7}
             />
           </a>
-          <a href="" className="pp-icons">
+          <a
+            href="https://www.linkedin.com/in/senthurveld"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pp-icons"
+          >
             <Linkedin
               className="hover:stroke-blue-500"
               size={26}
               strokeWidth={1.7}
             />
           </a>
-          <a href="" className="pp-icons">
+          <a
+            href="https://github.com/senthurveld"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pp-icons"
+          >
             <GithubIcon
               className="hover:stroke-blue-500"
               size={26}
               strokeWidth={1.7}
             />
           </a>
-          <a href="" className="ml-15 -mt-4">
+          <a
+            // download
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-15 -mt-4"
+          >
             <Magnet padding={70} magnetStrength={1}>
               <button className="border bg-amber-100 energy-btn">
                 Download CV
