@@ -6,6 +6,9 @@
   background-color: rgba(226, 226, 226, 0.91);
   z-index: -10;
 }
+html {
+  font-family: "Quicksand";
+}
 
 /* Hero Section */
 
@@ -16,47 +19,63 @@
 .text-bg-type {
   background-color: rgba(12, 124, 235, 0.882);
 }
-.sub-hightlight:hover{
+.sub-hightlight:hover {
   color: #0361a4;
   cursor: pointer;
+}
+.custom-h1 {
+  font-family: "Anta", "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
+}
+.title-h1{
+  font-family:"Doto";
+}
+
+.pp-icons:hover {
+  stroke-width: #0361a4;
 }
 /* Responsive Code  */
 /* Hero Section */
 @media screen and (max-width: 480px) {
   .hero-sec {
-    display: flex ;
+    display: flex;
   }
   .pp-img {
     display: inline-block;
   }
-  .pp-img img{
-    height: 190px;
+  .pp-img img {
+    height: 210px;
     border-radius: 20px;
   }
 }
 
-
 /* animation */
 .fade-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  animation: fadeLeft 0.8s ease forwards;
+  animation: fadeLeft 1.5s;
+  animation-range: view(20% 50%);
 }
 
 .fade-right {
-  opacity: 0;
-  transform: translateX(40px);
-  animation: fadeRight 0.8s ease forwards;
+  animation: fadeRight 1.5s;
+  animation-range: view(20% 50%);
 }
 
 @keyframes fadeLeft {
-  to {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
   to {
     opacity: 1;
     transform: translateX(0);

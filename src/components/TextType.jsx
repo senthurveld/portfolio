@@ -169,7 +169,7 @@ const TextType = ({
     Component,
     {
       ref: containerRef,
-      className: `inline-block whitespace-pre-wrap tracking-tight text-bg-type rounded-sm p-1  ${className}`,
+      className: `inline-block whitespace-pre-wrap tracking-tight text-bg-type rounded-sm p-1 custom-h1 ${className}`,
       ...props,
     },
     <span

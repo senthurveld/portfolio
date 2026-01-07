@@ -3,5 +3,6 @@
 * {
   color: #37373762;
   color: #1e1e1e;
+  scroll-snap-type: mandatory;
   scroll-behavior: smooth;
 }
