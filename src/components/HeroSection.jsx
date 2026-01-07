@@ -5,7 +5,7 @@ export const HeroSection = () => {
   return (
     <div
       id="home"
-      className="flex justify-center lg:justify-evenly items-center lg:flex-row flex-col mt-10 mb-50"
+      className="flex justify-center lg:justify-evenly items-center lg:flex-row flex-col mt-10 mb-30"
     >
       <div className="max-w-145 inline-block fade-left">
         <div className="text-4xl md:text-6xl sm:mt-5 mt-10 font-semibold custom-h1 mb-4">

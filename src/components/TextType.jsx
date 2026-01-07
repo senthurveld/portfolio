@@ -143,8 +143,8 @@ const TextType = ({
     }
 
     return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    getRandomSpeed,
     currentCharIndex,
     displayedText,
     isDeleting,
@@ -165,13 +165,19 @@ const TextType = ({
     hideCursorWhileTyping &&
     (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
 
-  return createElement(
-    Component,
-    {
-      ref: containerRef,
-      className: `inline-block whitespace-pre-wrap tracking-tight text-bg-type rounded-sm p-1 custom-h1 ${className}`,
-      ...props,
-    },
+  const elementProps = {
+    className: `inline-block whitespace-pre-wrap tracking-tight text-bg-type rounded-sm p-1 custom-h1 ${className}`,
+    ...props,
+  };
+
+  if (typeof Component === "string") {
+    elementProps.ref = containerRef;
+  } else {
+    // For non-DOM components, provide the ref as `containerRef` prop
+    elementProps.containerRef = containerRef;
+  }
+
+  return createElement(Component, elementProps,
     <span
       className="inline"
       style={{ color: getCurrentTextColor() || "inherit" }}

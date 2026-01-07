@@ -27,12 +27,61 @@ html {
   font-family: "Anta", "Franklin Gothic Medium", "Arial Narrow", Arial,
     sans-serif;
 }
-.title-h1{
-  font-family:"Doto";
+.title-h1 {
+  font-family: "Doto";
 }
-
+.title-h1:hover {
+  text-shadow: 0 0 16px rgb(76, 76, 76);
+}
 .pp-icons:hover {
   stroke-width: #0361a4;
+}
+
+.skill-title {
+  text-shadow: 0 0 10px rgb(71, 71, 71);
+}
+.scroll-bar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: auto;
+  scroll-snap-type: mandatory;
+  scroll-behavior: auto;
+}
+/* Projects */
+.project-card {
+  position: relative;
+  width: 320px;
+  height: 230px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+/* Text overlay */
+.overlay h3,
+.overlay p {
+  transform: translateY(19px);
+  color: rgb(0, 0, 0);
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  background: rgba(163, 163, 163, 0.136);
+  color: white;
+
+  /* Mobile default: visible */
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 /* Responsive Code  */
 /* Hero Section */
@@ -46,6 +95,51 @@ html {
   .pp-img img {
     height: 210px;
     border-radius: 20px;
+  }
+  .custom-pro {
+    opacity: 100;
+  }
+}
+/* 🔹 Desktop behavior */
+@media (min-width: 768px) {
+  .overlay {
+    opacity: 0;
+  }
+  .overlay h3,
+  .overlay p {
+    padding: -2px -5px;
+    color: rgb(255, 255, 255);
+  }
+  .overlay p {
+    margin-bottom: 9px;
+  }
+  .project-card:hover .overlay {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.626);
+  }
+
+  .project-card:hover img {
+    transform: scale(1.05);
+  }
+}
+/* Initial state */
+.fade-up {
+  opacity: 0;
+  transform: translateY(100%);
+  animation-duration: 2s;
+  animation: fadeUp linear both;
+  animation-timeline: view();
+  animation-range: entry 40% cover 30%;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

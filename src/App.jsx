@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { HeroSection } from "./components/HeroSection";
 import ClickSpark from "./components/ClickSpark";
 import { Skills } from "./components/Skills";
+import { ProjectsRow } from "./components/Projects";
 export const App = () => {
   return (
     <>
@@ -19,6 +20,7 @@ export const App = () => {
           <Navbar />
           <HeroSection />
           <Skills />
+          <ProjectsRow />
         </div>
       </ClickSpark>
     </>
