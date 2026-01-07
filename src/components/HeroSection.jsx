@@ -78,12 +78,11 @@ export const HeroSection = () => {
       {/* Hero Image  */}
       <div className="relative z-10 hidden md:block p-5 pp-img mt-5">
         <img
-          src="../../public/Layer.png"
+          src="/Layer.png"
           alt="profile image"
           className="w-auto h-105 bg-transparent max-sm:backdrop-blur-xs rounded-full fade-right"
         />
       </div>
-      {/* <div className="lg:mb-36 mb:20"></div> */}
     </div>
   );
 };
