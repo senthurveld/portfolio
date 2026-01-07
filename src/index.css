@@ -6,3 +6,17 @@
   scroll-snap-type: mandatory;
   scroll-behavior: smooth;
 }
+
+#page-loader {
+  position: fixed;
+  inset: 0;
+  background: #0f0f0f;
+  color: white;
+  font-size: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
