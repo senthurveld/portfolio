@@ -29,13 +29,13 @@
       z-index: 9999;
     }
     .typing {
-      width: 18ch;
+      width: 12ch;
       white-space: nowrap;
       overflow: hidden;
       border-right: 2px solid #fff;
 
       animation:
-        typing 2.5s steps(18),
+        typing 2.5s steps(14 end),
         blink 0.7s step-end infinite;
     }
 
@@ -54,7 +54,7 @@
 </head>
 
 <body>
-  <div id="page-loader">Loading<span class="typing">...</span></div>
+  <div id="page-loader"><span class="typing">Loading ...</span></div>
   <div id="root"></div>
   <script async type="module" src="/src/main.jsx"></script>
 
