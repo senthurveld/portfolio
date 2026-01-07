@@ -21,40 +21,39 @@
       inset: 0;
       background: #0f0f0f;
       color: white;
-      font-size: 24px;
+      font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 9999;
     }
-    .typing {
-      width: 12ch;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #fff;
 
-      animation:
-        typing 2.5s steps(14 end),
-        blink 0.7s step-end infinite;
+    /* Dots animation */
+    .dots::after {
+      content: "";
+      animation: dots 1.5s infinite steps(3);
     }
 
-    @keyframes typing {
-      from {
-        width: 0;
+    @keyframes dots {
+      0% {
+        content: "";
       }
-    }
-
-    @keyframes blink {
-      50% {
-        border-color: transparent;
+      33% {
+        content: ".";
+      }
+      66% {
+        content: "..";
+      }
+      100% {
+        content: "...";
       }
     }
   </style>
 </head>
 
 <body>
-  <div id="page-loader"><span class="typing">Loading ...</span></div>
+  <div id="page-loader">Loading<span class="typing"></span></div>
   <div id="root"></div>
   <script async type="module" src="/src/main.jsx"></script>
 
