@@ -141,7 +141,7 @@ html {
   opacity: 0;
   transform: translateY(100%);
   animation-duration: 2s;
-  animation: fadeUp linear both;
+  animation: fadeUp ease linear both;
   animation-timeline: view();
   animation-range: entry 20% cover 30%;
 }
