@@ -143,7 +143,7 @@ html {
   animation-duration: 2s;
   animation: fadeUp linear both;
   animation-timeline: view();
-  animation-range: entry 20% cover 20%;
+  animation-range: entry 20% cover 30%;
 }
 
 @keyframes fadeUp {
