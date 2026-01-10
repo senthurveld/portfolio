@@ -68,9 +68,7 @@ export const HeroSection = () => {
             className="ml-15 -mt-4"
           >
             <Magnet padding={70} magnetStrength={1}>
-              <button className=" energy-btn">
-                Download CV
-              </button>
+              <button className=" energy-btn">Download CV</button>
             </Magnet>
           </a>
         </div>

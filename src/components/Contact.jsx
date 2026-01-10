@@ -23,9 +23,12 @@ export const Contact = () => {
       );
   };
   return (
-    <div id="contact ">
+    <div>
       <div className="margintb">
-        <h2 className="text-5xl font-extrabold text-center mt-0 mb-10 title-h1 ">
+        <h2
+          className="text-5xl font-extrabold text-center mt-0 mb-10 title-h1"
+          id="contact"
+        >
           GET IN TOUCH
         </h2>
         <div className="max-w-md mx-auto p-6 rounded-2xl bg-white/10 backdrop-blur-xs border mb-40 border-white/20 fade-up">
