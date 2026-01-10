@@ -1,7 +1,7 @@
 import TextType from "./TextType";
 import { Mail, GithubIcon, Linkedin } from "lucide-react";
 import Magnet from "./Magnet";
-import './Button.css'
+import "./Button.css";
 export const HeroSection = () => {
   return (
     <div
@@ -9,7 +9,7 @@ export const HeroSection = () => {
       className="flex justify-center lg:justify-evenly items-center lg:flex-row flex-col mt-10 mb-30 margintb"
     >
       <div className="max-w-145 inline-block fade-left">
-        <div className="text-4xl md:text-6xl sm:mt-5 mt-10 font-semibold custom-h1 mb-14">
+        <div className="text-4xl md:text-6xl sm:mt-5 mt-10 font-semibold custom-h1 md:mb-14 mb-5">
           <span className="">I’m </span>
           <TextType
             text={["Senthurvel.", "React Developer.", "Coder."]}
@@ -28,7 +28,7 @@ export const HeroSection = () => {
           <span className="sub-hightlight">experimenting</span> with modern
           frontend tools.
         </p>
-        <div className="flex gap-6 mt-20 ml-2 pp-icons">
+        <div className="flex gap-6 mt-5 md:mt-20 ml-2 pp-icons">
           <a href="#contact" className="pp-icons">
             <Mail
               className="hover:stroke-blue-500"
@@ -78,8 +78,13 @@ export const HeroSection = () => {
         <img
           src="/Layer.png"
           alt="profile image"
-          className="w-auto h-105 bg-transparent max-sm:backdrop-blur-xs rounded-full fade-right hero-img"
+          className="w-auto h-105 bg-transparent max-sm:backdrop-blur-xs rounded
+          relative group
+          fade-right hero-img pl-6 pr-6"
         />
+        <span className="absolute inset-0 top-12 left-3  text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          👋
+        </span>
       </div>
     </div>
   );

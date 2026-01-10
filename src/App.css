@@ -7,7 +7,7 @@
   z-index: -10;
 }
 html {
-  font-family: "Quicksand";
+  font-family: "Quicksand", 'sans';
 }
 
 /* Hero Section */
@@ -93,8 +93,10 @@ html {
     display: inline-block;
   }
   .pp-img img {
-    height: 210px;
-    border-radius: 20px;
+    height: 320px;
+    background-size: contain;
+    image-resolution: 1080px;
+    border-radius: 50px;
   }
   .custom-pro {
     opacity: 100;
@@ -162,16 +164,15 @@ html {
 
 /* animation */
 .fade-left {
-  animation: fadeLeft 1.5s both;
+  animation: fadeLeft 2s both;
   animation-range: view();
   /* animation-range: entry 15% cover 21%; */
 }
 
 .fade-right {
-  animation: fadeRight 1.5s both;
+  animation: fadeRight 2s both;
   animation-range: view();
   /* animation-range: entry 15% cover 21%; */
-
 }
 
 @keyframes fadeLeft {

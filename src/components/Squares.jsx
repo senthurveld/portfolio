@@ -144,7 +144,7 @@ const Squares = ({
 
   return (
     <div className="fixed inset-0 z-0 pointer-events-none bg-global">
-      <canvas ref={canvasRef} className="w-full h-full pointer-events-auto" />
+      <canvas ref={canvasRef} className="w-full h-full pointer-events-auto " />
     </div>
   );
 
