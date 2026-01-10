@@ -31,7 +31,7 @@ export const Contact = () => {
         >
           GET IN TOUCH
         </h2>
-        <div className="max-w-md mx-auto p-6 rounded-2xl bg-white/10 backdrop-blur-xs border mb-40 border-white/20 fade-up">
+        <div className="max-w-md mx-auto p-6 rounded-2xl bg-white/10 backdrop-blur-xs border mb-40 border-white/20 fade-up margintb">
           <h2 className="text-2xl font-semibold text-white mb-6">Contact Me</h2>
 
           <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-4">

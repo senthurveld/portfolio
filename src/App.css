@@ -113,6 +113,9 @@ html {
   .margintb {
     margin: 10px 0;
   }
+  .title-h1 {
+    margin: 15px 0 35px;
+  }
 }
 /* 🔹 Desktop behavior */
 @media (min-width: 768px) {
@@ -141,9 +144,9 @@ html {
   opacity: 0;
   transform: translateY(100%);
   animation-duration: 2s;
-  animation: fadeUp ease linear both;
+  animation: fadeUp linear both;
   animation-timeline: view();
-  animation-range: entry 20% cover 30%;
+  animation-range: entry 18% cover 28%;
 }
 
 @keyframes fadeUp {
@@ -159,13 +162,16 @@ html {
 
 /* animation */
 .fade-left {
-  animation: fadeLeft 1.5s;
-  animation-range: view(20% 50%);
+  animation: fadeLeft 1.5s both;
+  animation-range: view();
+  /* animation-range: entry 15% cover 21%; */
 }
 
 .fade-right {
-  animation: fadeRight 1.5s;
-  animation-range: view(20% 50%);
+  animation: fadeRight 1.5s both;
+  animation-range: view();
+  /* animation-range: entry 15% cover 21%; */
+
 }
 
 @keyframes fadeLeft {
