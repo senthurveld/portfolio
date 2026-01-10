@@ -53,7 +53,7 @@ const projects = [
 
 export const ProjectsRow = () => {
   return (
-    <section className="py-12 mt-10 mb-20 " id="projects">
+    <section className="py-12 mt-10 mb-20 margintb" id="projects">
       <h2 className="text-5xl font-extrabold text-center mt-0 mb-25 title-h1">
         MY PROJECTS
       </h2>

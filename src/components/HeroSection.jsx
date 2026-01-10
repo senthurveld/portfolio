@@ -6,7 +6,7 @@ export const HeroSection = () => {
   return (
     <div
       id="home"
-      className="flex justify-center lg:justify-evenly items-center lg:flex-row flex-col mt-10 mb-30"
+      className="flex justify-center lg:justify-evenly items-center lg:flex-row flex-col mt-10 mb-30 margintb"
     >
       <div className="max-w-145 inline-block fade-left">
         <div className="text-4xl md:text-6xl sm:mt-5 mt-10 font-semibold custom-h1 mb-14">
@@ -68,7 +68,7 @@ export const HeroSection = () => {
             className="ml-15 -mt-4"
           >
             <Magnet padding={70} magnetStrength={1}>
-              <button className="border bg-amber-100 energy-btn">
+              <button className=" energy-btn">
                 Download CV
               </button>
             </Magnet>
@@ -80,7 +80,7 @@ export const HeroSection = () => {
         <img
           src="/Layer.png"
           alt="profile image"
-          className="w-auto h-105 bg-transparent max-sm:backdrop-blur-xs rounded-full fade-right"
+          className="w-auto h-105 bg-transparent max-sm:backdrop-blur-xs rounded-full fade-right hero-img"
         />
       </div>
     </div>

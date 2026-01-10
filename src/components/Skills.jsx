@@ -60,9 +60,11 @@ const skills = [
 export const Skills = () => {
   return (
     <section className="py-12" id="skills">
-      <h1 className="text-5xl font-extrabold text-center mt-10 mb-10 title-h1">MY SKILLS</h1>
+      <h1 className="text-5xl font-extrabold text-center mt-10 mb-10 title-h1">
+        MY SKILLS
+      </h1>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 place-items-center mb-10 overflow-auto fade-up">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 place-items-center mb-10 overflow-auto fade-up margintb">
         {skills.map((skill) => (
           <SkillCards key={skill.name} {...skill} />
         ))}

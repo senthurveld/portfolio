@@ -29,7 +29,6 @@ html {
 }
 .title-h1 {
   font-family: "Doto";
- 
 }
 .title-h1:hover {
   text-shadow: 0 0 16px rgb(76, 76, 76);
@@ -100,6 +99,20 @@ html {
   .custom-pro {
     opacity: 100;
   }
+  .skill-title {
+    font-size: 1rem;
+  }
+  .skill-img {
+    width: 36px;
+  }
+  .hero-img {
+    height: 190px;
+    width: auto;
+    margin-bottom: 0px;
+  }
+  .margintb {
+    margin: 10px 0;
+  }
 }
 /* 🔹 Desktop behavior */
 @media (min-width: 768px) {
@@ -130,7 +143,7 @@ html {
   animation-duration: 2s;
   animation: fadeUp linear both;
   animation-timeline: view();
-  animation-range: entry 40% cover 30%;
+  animation-range: entry 20% cover 20%;
 }
 
 @keyframes fadeUp {
