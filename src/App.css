@@ -6,6 +6,7 @@
   background-color: rgba(226, 226, 226, 0.91);
   z-index: -10;
 }
+
 html {
   font-family: "Quicksand", 'sans';
 }
@@ -19,20 +20,25 @@ html {
 .text-bg-type {
   background-color: rgba(12, 124, 235, 0.882);
 }
+
 .sub-hightlight:hover {
   color: #0361a4;
   cursor: pointer;
 }
+
 .custom-h1 {
   font-family: "Anta", "Franklin Gothic Medium", "Arial Narrow", Arial,
     sans-serif;
 }
+
 .title-h1 {
   font-family: "Doto";
 }
+
 .title-h1:hover {
   text-shadow: 0 0 16px rgb(76, 76, 76);
 }
+
 .pp-icons:hover {
   stroke-width: #0361a4;
 }
@@ -40,12 +46,15 @@ html {
 .skill-title {
   text-shadow: 0 0 10px rgb(71, 71, 71);
 }
+
 .scroll-bar {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
   -ms-overflow-style: auto;
   scroll-snap-type: mandatory;
   scroll-behavior: auto;
 }
+
 /* Projects */
 .project-card {
   position: relative;
@@ -56,17 +65,19 @@ html {
   text-decoration: none;
 
   /* Glass effect */
-  background: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0.105);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 25px rgba(130, 130, 130, 0.25);
 }
+
 /* Text overlay */
 .overlay h3,
 .overlay p {
-  transform: translateY(19px);
-  color: rgb(0, 0, 0);
+  transform: translateY(-9px);
+  color: rgb(255, 255, 255);
 }
+
 .overlay {
   position: absolute;
   inset: 0;
@@ -83,64 +94,78 @@ html {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
+
 /* Responsive Code  */
 /* Hero Section */
 @media screen and (max-width: 480px) {
   .hero-sec {
     display: flex;
   }
+
   .pp-img {
     display: inline-block;
   }
+
   .pp-img img {
     height: 320px;
     background-size: contain;
     image-resolution: 1080px;
     border-radius: 50px;
   }
+
   .custom-pro {
     opacity: 100;
   }
+
   .skill-title {
     font-size: 1rem;
   }
+
   .skill-img {
     width: 36px;
   }
+
   .hero-img {
     height: 190px;
     width: auto;
     margin-bottom: 0px;
   }
+
   .margintb {
     margin: 10px 0;
   }
+
   .title-h1 {
     margin: 15px 0 35px;
   }
 }
+
 /* 🔹 Desktop behavior */
 @media (min-width: 768px) {
   .overlay {
     opacity: 0;
   }
+
   .overlay h3,
   .overlay p {
     padding: -2px -5px;
     color: rgb(255, 255, 255);
   }
+
   .overlay p {
     margin-bottom: 9px;
   }
+
   .project-card:hover .overlay {
-    opacity: 1;
+    opacity: .8;
     background: rgba(0, 0, 0, 0.499);
   }
 
   .project-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 }
+
 /* Initial state */
 .fade-up {
   opacity: 0;
@@ -156,6 +181,7 @@ html {
     opacity: 0;
     transform: translateY(100%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -180,6 +206,7 @@ html {
     opacity: 0;
     transform: translateX(-60px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -191,6 +218,7 @@ html {
     opacity: 0;
     transform: translateX(60px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

@@ -1,12 +1,12 @@
 export const SkillCards = ({ name, image, level, color }) => {
   return (
-    <div className="w-full max-w-sm rounded-2xl shadow-sm p-6 hover:shadow-2xl transition ease-linear">
+    <div className="w-full max-w-md rounded-2xl shadow-md p-6 hover:shadow-2xl backdrop-blur-xs transition ease-linear">
       {/* Skill Image */}
       <div className="flex items-center gap-4">
         <img
           src={image}
           alt={name}
-          className="w-18 h-14 object-contain skill-img"
+          className="w-18 h-16 object-contain skill-img"
         />
         <h3 className="text-2xl font-normal text-gray-900 skill-title">
           {name}
@@ -14,7 +14,7 @@ export const SkillCards = ({ name, image, level, color }) => {
       </div>
 
       {/* Progress Bar */}
-      <div className="mt-5">
+      <div className="md:mt-6">
         <div className="flex justify-between text-sm font-semibold text-gray-900 mb-1">
           <span className="font-medium">Level</span>
           <span className="font-medium">{level}%</span>

@@ -2,14 +2,14 @@ import ProjectCard from "./ProjectCard";
 
 const projects = [
   {
-    title: "Musix App - VibeSpot",
-    image: "/musixapp.png",
-    liveUrl: "https://musix-app.up.railway.app/",
-  },
-  {
     title: "Bharathi Photo Studio",
     image: "/photography.png",
     liveUrl: "https://senthurveld.github.io/photography-site/",
+  },
+  {
+    title: "Musix App - VibeSpot",
+    image: "/musixapp.png",
+    liveUrl: "https://musix-app.up.railway.app/",
   },
   {
     title: "Expense Splitter",

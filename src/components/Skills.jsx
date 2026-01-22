@@ -11,19 +11,19 @@ const skills = [
     name: "CSS",
     image: "/css.png",
     level: 90,
-    color: "bg-green-400",
+    color: "bg-blue-600/60",
   },
   {
     name: "JavaScript",
     image: "/js.png",
     level: 80,
-    color: "bg-yellow-400",
+    color: "bg-yellow-300",
   },
   {
     name: "React",
     image: "/react.png",
     level: 75,
-    color: "bg-blue-500",
+    color: "bg-blue-400",
   },
   {
     name: "Node",
@@ -35,25 +35,31 @@ const skills = [
     name: "Express",
     image: "/express.png",
     level: 50,
-    color: "bg-blue-500",
+    color: "bg-gray-500",
   },
   {
     name: "MySQL",
     image: "/mysql.png",
     level: 65,
-    color: "bg-blue-500",
+    color: "bg-orange-500",
   },
   {
     name: "MongoDB",
     image: "/mongodb.png",
     level: 60,
-    color: "bg-blue-500",
+    color: "bg-green-500",
   },
   {
     name: "Tailwind CSS",
     image: "/tailwind.png",
     level: 70,
     color: "bg-cyan-500",
+  },
+  {
+    name: "GitHUb",
+    image: "/github.png",
+    level: 85,
+    color: "bg-gray-700",
   },
 ];
 
@@ -64,7 +70,7 @@ export const Skills = () => {
         MY SKILLS
       </h1>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 place-items-center mb-10 overflow-auto fade-up margintb">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 lg:gap-8 gap-2 place-items-center mb-10 overflow-auto fade-up margintb">
         {skills.map((skill) => (
           <SkillCards key={skill.name} {...skill} />
         ))}

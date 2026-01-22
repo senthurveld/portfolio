@@ -15,7 +15,7 @@ const ProjectCard = ({ title, image, liveUrl }) => {
           src={image}
           alt={title}
           className="max-w-full max-h-fit object-center
-                     group-hover:scale-115 transition-transform duration-500"
+                     group-hover:scale-110 transition-transform duration-500"
         />
       </div>
 
@@ -23,11 +23,11 @@ const ProjectCard = ({ title, image, liveUrl }) => {
       <div
         className="
           absolute inset-0 flex flex-col justify-end p-5
-          bg-white/0 custom-pro overlay
+          bg-white/0 custom-pro overlay 
         "
       >
         <h3 className="text-xl font-semibold pro-name ">{title}</h3>
-        <p className="text-xs text-gray-200 mt-1"> View Live Project →</p>
+        <p className="text-xs text-gray-100 mt-1"> View Live Project →</p>
       </div>
     </a>
   );
