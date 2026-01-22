@@ -73,7 +73,7 @@ export const Contact = () => {
             <button
               type="submit"
               className="mt-2 py-3 rounded-full font-extrabold text-white
-                     bg-gradient-to-r from-blue-500 to-blue-700
+                     bg-linear-to-r from-blue-500 to-blue-700
                      hover:scale-[1.02] hover:shadow-blue-400 transition-transform"
             >
               Send Message

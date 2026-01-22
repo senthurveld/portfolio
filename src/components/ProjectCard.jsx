@@ -14,7 +14,7 @@ const ProjectCard = ({ title, image, liveUrl }) => {
         <img
           src={image}
           alt={title}
-          className="max-w-full max-h-full object-contain
+          className="max-w-full max-h-fit object-center
                      group-hover:scale-115 transition-transform duration-500"
         />
       </div>
@@ -27,7 +27,7 @@ const ProjectCard = ({ title, image, liveUrl }) => {
         "
       >
         <h3 className="text-xl font-semibold pro-name ">{title}</h3>
-        <p className="text-xs text-gray-200 mt-1">View Live Project →</p>
+        <p className="text-xs text-gray-200 mt-1"> View Live Project →</p>
       </div>
     </a>
   );
