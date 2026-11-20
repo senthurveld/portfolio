@@ -1,0 +1,639 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Tokens: Clay (Putty / Night) ----------
+   Matte clay surfaces: soft layered shadows + an inner top highlight, no hard ink borders.
+   Neutrals lean toward the periwinkle accent. One loud colour: vest red, for primary actions only. */
+:root {
+  --bg: #eeebf0;
+  --bg-2: #e4e0e8;
+  --surface: #f9f8fa;
+  --line: #d9d4de;
+  --ink: #18151d;
+  --body: #3e3a45;
+  --muted: #67626f;
+  --on-pastel: #18151d; /* text on pastels never changes */
+
+  --red: #cf3e2a; /* primary actions, one accent word */
+  --on-red: #ffffff;
+
+  --periwinkle: #a99dff;
+  --mint: #7fdcb5;
+  --lemon: #f3e26a; /* straw */
+  --bubblegum: #ffaacd;
+  --coral: #ff9b7d;
+  --sky: #9dceff;
+
+  --hi: rgb(255 255 255 / 0.8);
+  --lo: rgb(48 32 80 / 0.07);
+  --drop: rgb(36 26 58 / 0.26);
+  --clay: inset 0 1.5px 0 var(--hi), inset 0 -4px 10px var(--lo), 0 1px 2px rgb(36 26 58 / 0.08), 0 14px 30px -16px var(--drop);
+  --clay-lg: inset 0 2px 0 var(--hi), inset 0 -8px 18px var(--lo), 0 2px 4px rgb(36 26 58 / 0.06), 0 34px 64px -30px var(--drop);
+  --clay-press: inset 0 3px 8px rgb(36 26 58 / 0.18), inset 0 -1px 0 var(--hi);
+  --clay-pastel: inset 0 2px 0 rgb(255 255 255 / 0.55), inset 0 -5px 12px rgb(0 0 0 / 0.1), 0 12px 26px -14px rgb(30 20 50 / 0.38);
+
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+  --section-y: clamp(88px, 11vw, 152px);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #121117;
+  --bg-2: #1a1920;
+  --surface: #211f28;
+  --line: #34313d;
+  --ink: #f2eff4;
+  --body: #d0cbd7;
+  --muted: #a39eac;
+  --red: #ff6f57;
+  --on-red: #18151d;
+  --hi: rgb(255 255 255 / 0.07);
+  --lo: rgb(0 0 0 / 0.25);
+  --drop: rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-red: var(--red);
+  --color-on-red: var(--on-red);
+  --color-on-pastel: var(--on-pastel);
+  --color-periwinkle: var(--periwinkle);
+  --color-mint: var(--mint);
+  --color-lemon: var(--lemon);
+  --color-bubblegum: var(--bubblegum);
+  --color-coral: var(--coral);
+  --color-sky: var(--sky);
+
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-sans: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-poster: "Dela Gothic One", "Arial Black", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  --text-hero: clamp(2.5rem, 1.5rem + 3.6vw, 4.6rem);
+  --text-5: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+  --text-4: clamp(1.55rem, 1.2rem + 1.5vw, 2.4rem);
+  --text-3: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    background: var(--bg);
+    color: var(--body);
+    overflow-x: clip;
+  }
+  /* Matte grain so flat fills read as clay, not plastic */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0.05;
+    /* Own layer, rastered once. Without it the noise is repainted with the page on every
+       scroll frame: measured p95 frame 69ms → 21ms with this line. */
+    will-change: transform;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection {
+    background: var(--lemon);
+    color: var(--on-pastel);
+  }
+  :focus-visible {
+    outline: 2.5px solid var(--red);
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+  /* Sections take focus after an in-page jump; that's for the Tab order, not a visible ring */
+  section[tabindex="-1"]:focus-visible {
+    outline: none;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    text-wrap: balance;
+    font-variation-settings: "opsz" 72;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  button {
+    cursor: pointer;
+  }
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* ---------- Components ---------- */
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 32px;
+    }
+  }
+  @media (min-width: 1280px) {
+    .wrap {
+      padding-inline: 40px;
+    }
+  }
+
+  .section {
+    padding-block: var(--section-y);
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .label.on-pastel {
+    color: var(--on-pastel);
+    opacity: 0.72;
+  }
+
+  /* Section heading block: label + title + optional lede, same rhythm everywhere */
+  .head {
+    display: grid;
+    gap: 14px;
+    max-width: 44rem;
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+  .head h2 {
+    font-size: var(--text-5);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-variation-settings: "opsz" 96, "wdth" 86;
+  }
+  .head p:not(.label) {
+    font-size: 1.0625rem;
+    max-width: 38rem;
+  }
+
+  .clay {
+    background: var(--surface);
+    border-radius: var(--r-lg);
+    box-shadow: var(--clay);
+  }
+  .clay-lg {
+    background: var(--surface);
+    border-radius: var(--r-xl);
+    box-shadow: var(--clay-lg);
+  }
+  .clay-pastel {
+    color: var(--on-pastel);
+    box-shadow: var(--clay-pastel);
+  }
+  /* Italic serif word set inside a display heading */
+  .accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-variation-settings: normal;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    padding-right: 0.06em;
+  }
+
+  .well {
+    background: var(--bg-2);
+    border-radius: var(--r-md);
+    box-shadow: var(--clay-press);
+  }
+  .pastel,
+  .pastel * {
+    color: var(--on-pastel);
+  }
+
+  /* Buttons: clay pills that press in */
+  .btn {
+    --btn-bg: var(--surface);
+    --btn-fg: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 48px;
+    padding-inline: 1.35rem;
+    border-radius: 999px;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.975rem;
+    letter-spacing: -0.01em;
+    box-shadow: var(--clay);
+    transition:
+      transform 0.35s var(--ease-spring),
+      box-shadow 0.25s var(--ease-out),
+      background-color 0.25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: var(--clay-press);
+    transition-duration: 0.08s;
+  }
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .btn-primary {
+    --btn-bg: var(--red);
+    --btn-fg: var(--on-red);
+    --hi: rgb(255 255 255 / 0.35);
+    --lo: rgb(0 0 0 / 0.14);
+  }
+  .btn-secondary {
+    --btn-bg: var(--surface);
+  }
+  .btn-pastel {
+    color: var(--on-pastel);
+    box-shadow: var(--clay-pastel);
+  }
+  .btn-icon {
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--bg-2);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .link {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.2s;
+  }
+  .link:hover {
+    text-decoration-color: var(--red);
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(color-mix(in oklab, var(--ink) 9%, transparent) 1px, transparent 1.3px);
+    background-size: 22px 22px;
+  }
+
+  /* Hero blueprint: the mini-site drawn as a spec sheet. Fixed colours, like the poster. */
+  .bp-paper {
+    background-color: #f4f4f0;
+    background-image:
+      linear-gradient(rgb(17 17 17 / 0.11) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(17 17 17 / 0.11) 1px, transparent 1px),
+      linear-gradient(rgb(17 17 17 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(17 17 17 / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;
+  }
+  .bp-box {
+    position: relative;
+    outline: 1px solid #111;
+    outline-offset: -1px;
+    border-radius: 0 !important;
+  }
+  .bp-tag {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    padding: 0 4px;
+    background: #e61919;
+    color: #f4f4f0;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    font-weight: 600;
+    line-height: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .sr-only-focusable:not(:focus) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Wanted poster paper: halftone dots + soft edge burn. Fixed colours: it's a physical object. */
+  .poster-paper {
+    background-color: #f1e3c2;
+    color: #2b1f14;
+    background-image:
+      radial-gradient(rgb(43 31 20 / 0.12) 1px, transparent 1.25px),
+      radial-gradient(120% 90% at 50% 40%, transparent 55%, rgb(120 80 30 / 0.22) 100%);
+    background-size:
+      5px 5px,
+      100% 100%;
+  }
+}
+
+/* Set by Lenis while the page is moving: no hover hit-testing or hover restyles mid-scroll. */
+html[data-scrolling] main,
+html[data-scrolling] footer {
+  pointer-events: none;
+}
+
+/* Moved by GSAP every frame. JS-driven transforms don't get their own layer the way CSS
+   animations do, so without this each frame repaints the whole page layer underneath. */
+[data-pebble],
+[data-band] {
+  will-change: transform;
+}
+/* Marquee rows: two copies of the list, translate by half. Pauses on hover/focus. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-dur, 48s) linear infinite;
+}
+.marquee-track[data-reverse] {
+  animation-direction: reverse;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+.marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+/* Scroll-scrubbed paragraph: words start dim, JS scrubs them to full ink */
+[data-scrub] [data-word] {
+  opacity: var(--o, 1);
+}
+
+/* Equaliser bars for now-playing */
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq 900ms ease-in-out infinite;
+}
+
+
+/* ---------- Interaction motion (pairs with lib/effects.js) ---------- */
+
+/* Services: an opening lane's line and chips settle in one after another */
+.lane-in {
+  transition:
+    opacity 0.35s var(--ease-out),
+    translate 0.5s var(--ease-out);
+}
+[data-lane="shut"] .lane-in {
+  opacity: 0;
+  translate: 0 8px;
+  transition-duration: 0.15s;
+}
+[data-lane="open"] .lane-in {
+  transition-delay: calc(90ms + var(--i, 0) * 45ms);
+}
+
+/* Experience: rail nodes light up in the role's own colour when the fill reaches them */
+.exp-node {
+  background: var(--surface);
+  box-shadow:
+    0 0 0 3px var(--line),
+    var(--clay);
+  transition:
+    background-color 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out),
+    scale 0.5s var(--ease-spring);
+}
+.exp-node.is-on {
+  background: var(--tone, var(--red));
+  box-shadow:
+    0 0 0 3px var(--red),
+    var(--clay-pastel);
+  scale: 1.2;
+}
+
+/* Lab: pastel fill wipes in from the left on hover */
+.lab-fill {
+  background: color-mix(in oklab, var(--tone) 32%, var(--bg));
+  clip-path: inset(0 100% 0 0 round 16px);
+  transition: clip-path 0.5s var(--ease-out);
+}
+@media (hover: hover) {
+  .group:hover > .lab-fill {
+    clip-path: inset(0 0 0 0 round 16px);
+  }
+}
+.group:focus-visible > .lab-fill {
+  clip-path: inset(0 0 0 0 round 16px);
+}
+
+/* Sliding thumbs (contact topics, nav scrollspy): placed by JS, animated once placed */
+.topic-thumb[data-ready],
+.nav-pill[data-ready] {
+  transition:
+    transform 0.5s var(--ease-spring),
+    width 0.4s var(--ease-out),
+    height 0.4s var(--ease-out),
+    opacity 0.25s var(--ease-out);
+}
+
+/* Form messages ease in instead of popping */
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+}
+.msg-in {
+  animation: msg-in 0.28s var(--ease-out);
+}
+
+/* Success check draws itself */
+@keyframes draw-in {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+.draw-in {
+  stroke-dasharray: 1;
+  animation: draw-in 0.45s 0.05s var(--ease-out) backwards;
+}
+
+/* Nav menus open from their trigger instead of snapping in */
+#more-menu,
+#mobile-menu {
+  transition:
+    opacity 0.18s var(--ease-out),
+    scale 0.22s var(--ease-out),
+    translate 0.22s var(--ease-out),
+    display 0.22s allow-discrete;
+}
+#more-menu {
+  transform-origin: 50% 0;
+}
+#more-menu[hidden] {
+  opacity: 0;
+  scale: 0.96;
+}
+#mobile-menu[hidden] {
+  opacity: 0;
+  translate: 0 -6px;
+}
+@starting-style {
+  #more-menu:not([hidden]) {
+    opacity: 0;
+    scale: 0.96;
+  }
+  #mobile-menu:not([hidden]) {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+/* Theme wipe: let JS drive the clip-path, disable default crossfade */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Dialogs */
+dialog.case::backdrop {
+  background: color-mix(in oklab, #121117 40%, transparent);
+  backdrop-filter: blur(10px);
+}
+dialog.case {
+  max-width: none;
+  max-height: none;
+}
+
+/* Résumé dialog prints alone, as a clean A4 sheet */
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  body::after {
+    display: none;
+  }
+  /* Remove (not just hide) everything else so no blank pages follow */
+  #root > *:not(#resume-sheet) {
+    display: none !important;
+  }
+  #resume-sheet {
+    position: static;
+    margin: 0;
+    max-width: none;
+    color: #000;
+  }
+  #resume-sheet::backdrop {
+    display: none;
+  }
+}
+
+/* Scroll progress bar: CSS scroll timeline when supported */
+.progress-bar {
+  transform-origin: 0 50%;
+  transform: scaleX(var(--p, 0));
+}
+@supports (animation-timeline: scroll()) {
+  @keyframes grow-x {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .progress-bar {
+    animation: grow-x linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+/* ---------- Reduced motion: show final states ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .marquee {
+    overflow-x: auto;
+  }
+}
