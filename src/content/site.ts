@@ -390,6 +390,12 @@ export const contact = {
     { id: "email", label: "Email", hint: "Lands in my inbox. You get a copy right away." },
     { id: "whatsapp", label: "WhatsApp", hint: "Opens WhatsApp with your message ready. Just hit send." },
   ] satisfies { id: ContactChannel; label: string; hint: string }[],
+  // Why the pre-picked channel fits, shown under the cards. Picked by suggestChannel() in logic.ts.
+  suggest: {
+    hiring: "Email keeps a paper trail, and the auto-reply sends you my resume.",
+    urgent: "You need it ASAP, so WhatsApp is the fastest way to get started.",
+    other: "Email keeps it all in one thread, with a copy in your inbox.",
+  },
   sent: {
     email: "It's in my inbox, and a copy is on its way to yours.",
     whatsapp: "WhatsApp should be open with your message ready. Hit send there and we're talking.",

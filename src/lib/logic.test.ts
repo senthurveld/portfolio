@@ -13,6 +13,7 @@ import {
   splitRows,
   stackDim,
   stackScale,
+  suggestChannel,
   validateContact,
   whatsappLink,
   wrap,
@@ -163,6 +164,17 @@ describe("reasonFromParam()", () => {
     expect(reasonFromParam(null)).toBeNull();
     expect(reasonFromParam("nope")).toBeNull();
     expect(reasonFromParam("constructor")).toBeNull();
+  });
+});
+
+describe("suggestChannel()", () => {
+  it("sends urgent freelance work to WhatsApp and everything else to email", () => {
+    expect(suggestChannel({ reason: "freelance", timeline: "ASAP" })).toBe("whatsapp");
+    expect(suggestChannel({ reason: "freelance", timeline: "Within a month" })).toBe("email");
+    expect(suggestChannel({ reason: "freelance", timeline: "" })).toBe("email");
+    expect(suggestChannel({ reason: "hiring", timeline: "" })).toBe("email");
+    expect(suggestChannel({ reason: "hello", timeline: "" })).toBe("email");
+    expect(suggestChannel({ reason: "", timeline: "" })).toBe("email");
   });
 });
 

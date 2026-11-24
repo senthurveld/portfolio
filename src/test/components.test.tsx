@@ -5,11 +5,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { services, site } from "@/content/site";
 import Contact from "@/routes/Contact";
 import { Lanes } from "@/sections/Services";
+import { notify } from "@/lib/toast";
+
+vi.mock("@/lib/toast", () => ({ notify: { success: vi.fn(), error: vi.fn(), info: vi.fn() } }));
 
 beforeEach(() => {
   vi.stubGlobal("IntersectionObserver", class { observe() {} unobserve() {} disconnect() {} });
   vi.stubGlobal("matchMedia", (q: string) => ({ matches: q.includes("reduce"), media: q, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }));
   localStorage.clear();
+  vi.mocked(notify.success).mockClear();
+  vi.mocked(notify.error).mockClear();
 });
 
 const at = (path: string, el: React.ReactElement) =>
@@ -87,6 +92,7 @@ describe("Contact form", () => {
     expect(body).toMatchObject({ reason: "freelance", detail: "Business website", channel: "email", name: "Asha", email: "asha@example.com", website: "" });
     expect(typeof body.elapsed).toBe("number");
     expect(await screen.findByRole("status")).toHaveTextContent("Sent.");
+    expect(notify.success).toHaveBeenCalledWith("Message sent", expect.any(String));
   });
 
   it("keeps the message and offers a mailto fallback when sending fails", async () => {
@@ -101,6 +107,28 @@ describe("Contact form", () => {
     expect(screen.getByRole("link", { name: "email me directly" }).getAttribute("href")).toMatch(/^mailto:/);
     expect(screen.getByRole("button", { name: /try again/i })).toBeEnabled();
     expect(screen.queryByRole("status")).toBeNull();
+    expect(notify.error).toHaveBeenCalledOnce();
+    expect(notify.success).not.toHaveBeenCalled();
+  });
+
+  it("with a WhatsApp number, pre-picks WhatsApp for urgent freelance work", async () => {
+    site.whatsapp = "919876543210";
+    const user = userEvent.setup();
+    at("/contact", <Contact />);
+    await user.click(screen.getByRole("radio", { name: /Freelance project/ }));
+    await user.click(await screen.findByRole("radio", { name: "ASAP" }));
+    await user.click(screen.getByRole("button", { name: /next/i }));
+    await user.type(await screen.findByLabelText("Name"), "Asha");
+    await user.type(screen.getByLabelText("Email"), "asha@example.com");
+    await user.type(screen.getByLabelText("Message"), "I need a five page site for my bakery.");
+    await user.click(screen.getByRole("button", { name: /next/i }));
+
+    expect(await screen.findByRole("radio", { name: /WhatsApp.*Suggested/ })).toBeChecked();
+    expect(screen.getByText(/fastest way/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /open whatsapp/i })).toBeInTheDocument();
+    // A manual pick wins over the suggestion.
+    await user.click(screen.getByRole("radio", { name: /Email/ }));
+    expect(screen.getByRole("button", { name: /send email/i })).toBeEnabled();
   });
 
   it("with a WhatsApp number, opens wa.me from a real link and copies the lead to the inbox", async () => {
@@ -111,7 +139,9 @@ describe("Contact form", () => {
     at("/contact", <Contact />);
     await fillToSendStep(user, /Just to connect/);
 
-    expect(screen.getByRole("button", { name: /^send$/i })).toBeDisabled();
+    // Just saying hi: email is pre-picked, but WhatsApp is one tap away.
+    expect(screen.getByRole("radio", { name: /Email.*Suggested/ })).toBeChecked();
+    expect(screen.getByRole("button", { name: /send email/i })).toBeEnabled();
     await user.click(screen.getByRole("radio", { name: /WhatsApp/ }));
     const link = screen.getByRole("link", { name: /open whatsapp/i });
     const href = link.getAttribute("href")!;

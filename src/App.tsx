@@ -5,6 +5,7 @@ import Home from "./routes/Home";
 import { pages } from "./routes/load";
 import { Cursor } from "./shell/Cursor";
 import { Fabs } from "./shell/Fabs";
+import { Toaster } from "./components/Toaster";
 import { Footer } from "./shell/Footer";
 import { Nav } from "./shell/Nav";
 import { PageTransition } from "./shell/PageTransition";
@@ -122,6 +123,7 @@ export default function App() {
         </Suspense>
         <Footer />
         <Fabs />
+        <Toaster />
         <Cursor />
         <PageTransition />
         <Palette />

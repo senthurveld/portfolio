@@ -7,7 +7,8 @@ import { FadeIn } from "@/components/FadeIn";
 import { PageHeader } from "@/components/PageHeader";
 import { PaperBurst, type BurstOrigin } from "@/components/PaperBurst";
 import { contact, site, type ContactChannel, type ContactReason } from "@/content/site";
-import { CONTACT_MAX, cn, contactMailto, contactReasonLine, real, reasonFromParam, validateContact, whatsappLink, type ContactDraft } from "@/lib/logic";
+import { CONTACT_MAX, cn, contactMailto, contactReasonLine, real, reasonFromParam, suggestChannel, validateContact, whatsappLink, type ContactDraft } from "@/lib/logic";
+import { notify } from "@/lib/toast";
 import { LocalTime } from "./Now";
 
 const KEY = "contact-draft-v2";
@@ -46,7 +47,7 @@ function Chips({ legend, options, value, onChange }: { legend: string; options: 
 }
 
 /** Large radio card, used for the reason and the channel. */
-function Choice({ name, checked, onChange, title, hint, icon: Icon }: { name: string; checked: boolean; onChange: () => void; title: string; hint: string; icon?: LucideIcon }) {
+function Choice({ name, checked, onChange, title, hint, icon: Icon, badge }: { name: string; checked: boolean; onChange: () => void; title: string; hint: string; icon?: LucideIcon; badge?: string }) {
   return (
     <label
       className={cn(
@@ -59,6 +60,9 @@ function Choice({ name, checked, onChange, title, hint, icon: Icon }: { name: st
         <span className="flex items-center gap-2.5">
           {Icon && <Icon aria-hidden="true" className="size-5" />}
           {title}
+          {badge && (
+            <span className={cn("kicker rounded-full border px-2 py-0.5 text-[0.6rem] font-semibold", checked ? "border-current/30" : "border-[var(--home-line)] text-[var(--home-muted)]")}>{badge}</span>
+          )}
         </span>
         <Check aria-hidden="true" className={cn("size-5 shrink-0 transition-opacity", checked ? "opacity-100" : "opacity-0")} />
       </span>
@@ -124,7 +128,6 @@ export default function Contact() {
   const [tearing, setTearing] = useState(false);
   const [burst, setBurst] = useState<BurstOrigin | null>(null);
   const [formHeight, setFormHeight] = useState<number>();
-  const [copied, setCopied] = useState(false);
   const [trap, setTrap] = useState("");
   const startedAt = useRef(0);
   const formRef = useRef<HTMLFormElement>(null);
@@ -149,10 +152,13 @@ export default function Contact() {
   }, [status]);
 
   const set = <K extends keyof ContactDraft>(k: K, v: ContactDraft[K]) => setD((x) => ({ ...x, [k]: v }));
-  const pickReason = (id: ContactReason) => setD((x) => (x.reason === id ? x : { ...x, reason: id, detail: "", timeline: "" }));
+  const pickReason = (id: ContactReason) => setD((x) => (x.reason === id ? x : { ...x, reason: id, detail: "", timeline: "", channel: "" }));
   const last = contact.steps.length - 1;
   const reason = contact.reasons.find((r) => r.id === d.reason);
-  const channel: ContactChannel | "" = whatsapp ? d.channel : "email";
+  // Pre-picked from why they're here until they pick one themselves.
+  const suggested = suggestChannel(d);
+  const suggestWhy = d.reason === "hiring" ? contact.suggest.hiring : suggested === "whatsapp" ? contact.suggest.urgent : contact.suggest.other;
+  const channel: ContactChannel | "" = whatsapp ? d.channel || suggested : "email";
   const waHref = whatsapp ? whatsappLink(whatsapp, d) : "";
 
   /** Validates name, email and message; shows errors and focuses the first bad field. */
@@ -180,11 +186,15 @@ export default function Contact() {
     } catch {
       /* ignore */
     }
-    if (reduce) return setStatus("sent");
+    const done = () => {
+      setStatus("sent");
+      notify.success(via === "email" ? "Message sent" : "Copy saved", contact.sent[via]);
+    };
+    if (reduce) return done();
     const r = (waRef.current ?? sendRef.current)?.getBoundingClientRect();
     setTearing(true);
     if (r) setTimeout(() => setBurst({ x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width }), 60);
-    setTimeout(() => setStatus("sent"), 380);
+    setTimeout(done, 380);
   };
 
   const submit = async (ev: React.FormEvent) => {
@@ -200,6 +210,7 @@ export default function Contact() {
       celebrate("email");
     } catch {
       setStatus("error");
+      notify.error("Couldn't send", "Your message is still here. Try again, or email me directly.");
     }
   };
 
@@ -212,8 +223,7 @@ export default function Contact() {
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(site.email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      notify.info("Email copied", site.email);
     } catch {
       /* clipboard blocked: the address is visible anyway */
     }
@@ -341,9 +351,19 @@ export default function Contact() {
                         {contact.channels
                           .filter((c) => c.id === "email" || whatsapp)
                           .map((c) => (
-                            <Choice key={c.id} name="channel" checked={channel === c.id} onChange={() => set("channel", c.id)} title={c.label} hint={c.hint} icon={c.id === "email" ? Mail : MessageCircle} />
+                            <Choice
+                              key={c.id}
+                              name="channel"
+                              checked={channel === c.id}
+                              onChange={() => set("channel", c.id)}
+                              title={c.label}
+                              hint={c.hint}
+                              icon={c.id === "email" ? Mail : MessageCircle}
+                              badge={whatsapp && c.id === suggested ? "Suggested" : undefined}
+                            />
                           ))}
                       </div>
+                      {whatsapp && <p className="mt-3 text-sm text-[var(--home-muted)]">{suggestWhy}</p>}
                     </fieldset>
 
                     {/* The paper slip: exactly what gets sent. It tears off on send. */}
@@ -421,8 +441,8 @@ export default function Contact() {
               {site.email}
             </a>
             <button type="button" onClick={copy} className="kicker mt-3 flex min-h-11 items-center gap-2 text-[var(--home-dim)] hover:text-[var(--home-fg)]">
-              {copied ? <Check className="size-4 text-live" /> : <Copy className="size-4" />}
-              <span aria-live="polite">{copied ? "Copied" : "Copy email"}</span>
+              <Copy className="size-4" />
+              Copy email
             </button>
           </div>
           <div>

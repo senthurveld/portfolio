@@ -79,6 +79,10 @@ const reasonOf = (id: ContactDraft["reason"]) => contact.reasons.find((r) => r.i
 /** "Freelance project · Portfolio website · ASAP" */
 export const contactReasonLine = (d: ContactDraft) => [reasonOf(d.reason)?.label ?? "Hello", d.detail, d.timeline].filter(Boolean).join(" · ");
 
+/** Best channel for why they're here: urgent freelance work goes to WhatsApp, everything else to email. */
+export const suggestChannel = (d: Pick<ContactDraft, "reason" | "timeline">): ContactChannel =>
+  d.reason === "freelance" && d.timeline === "ASAP" ? "whatsapp" : "email";
+
 /** "[Freelance · Portfolio website] Asha (Acme)". One line, safe for a mail header. */
 export function contactSubject(d: ContactDraft) {
   const tag = [reasonOf(d.reason)?.tag ?? "Hello", d.detail, d.timeline].filter(Boolean).join(" · ");

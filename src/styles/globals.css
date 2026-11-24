@@ -739,3 +739,44 @@ html.light .page-glow {
     transform: none;
   }
 }
+
+/* Toasts (lib/toast.tsx). Sonner animates the slide/stack; these are the small extras. */
+.toast-rainbow {
+  background: linear-gradient(90deg, #ff4d4d, #ff9f1c, #ffd23f, #3ddc84, #2ec4f1, #6c63ff, #ff5da2);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .toast-icon {
+    animation: toast-pop 0.55s var(--ease-expo) 0.08s both;
+  }
+  .toast-rainbow {
+    transform-origin: 0 50%;
+    animation: toast-sweep 0.7s var(--ease-house) both;
+  }
+}
+@keyframes toast-pop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+    rotate: -25deg;
+  }
+}
+@keyframes toast-sweep {
+  from {
+    transform: scaleX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-sonner-toast] {
+    transition: opacity 0.2s linear !important;
+    transform: none !important;
+  }
+}
+/* Sonner sets width:100% on phones, which ignores the right inset that clears the Fabs. */
+@media (max-width: 600px) {
+  [data-sonner-toaster] {
+    width: auto !important;
+  }
+  [data-sonner-toaster] [data-sonner-toast] {
+    width: 100% !important;
+  }
+}
