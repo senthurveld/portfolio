@@ -8,7 +8,7 @@
 
 **Frontend & MERN AI developer** · Coimbatore, India
 
-[**senthurveldz.vercel.app**](https://senthurveldz.vercel.app) &nbsp;·&nbsp;
+[**senthurdev.vercel.app**](https://senthurdev.vercel.app/) &nbsp;·&nbsp;
 [GitHub](https://github.com/senthurveld) &nbsp;·&nbsp;
 [LinkedIn](https://www.linkedin.com/in/senthurveld2005)
 
@@ -24,17 +24,25 @@ I'm Senthurvel, a frontend developer from Coimbatore. I build fast, motion-rich 
 
 ## Built with
 
-<img src="https://skillicons.dev/icons?i=react,ts,vite,tailwind,threejs,vercel&theme=dark" alt="React, TypeScript, Vite, Tailwind CSS, Three.js, Vercel">
-
-| Layer | Tools |
-| --- | --- |
-| Framework | React 19 · TypeScript (strict) · Vite |
-| Styling | Tailwind CSS v4 · Urbanist + Geist Mono (self-hosted) |
-| Motion | Motion · Lenis smooth scroll · View Transitions |
-| 3D | Three.js graphite cube hero |
-| Routing & UI | React Router 7 · Radix Dialog · cmdk · Lucide |
-| Testing | Vitest · Testing Library · Playwright (screenshots) |
-| Hosting | Vercel |
+<table>
+  <tr>
+    <td align="center"><img width="48" src="https://skillicons.dev/icons?i=js&theme=dark" alt="JavaScript"></td>
+    <td align="center"><img width="48" src="https://skillicons.dev/icons?i=ts&theme=dark" alt="TypeScript"></td>
+    <td align="center"><img width="48" src="https://skillicons.dev/icons?i=react&theme=dark" alt="React"></td>
+    <td align="center"><img width="48" src="https://skillicons.dev/icons?i=vite&theme=dark" alt="Vite"></td>
+    <td align="center"><img width="48" src="https://skillicons.dev/icons?i=tailwind&theme=dark" alt="Tailwind CSS"></td>
+    <td align="center"><img width="48" src="https://skillicons.dev/icons?i=threejs&theme=dark" alt="Three.js"></td>
+    <td align="center"><img width="48" src="https://skillicons.dev/icons?i=vercel&theme=dark" alt="Vercel"></td>
+  </tr>
+  <tr><th colspan="2">Layer</th><th colspan="5">Tools</th></tr>
+  <tr><td colspan="2">Framework</td><td colspan="5">React 19 · TypeScript (strict) · Vite</td></tr>
+  <tr><td colspan="2">Styling</td><td colspan="5">Tailwind CSS v4 · Urbanist + Geist Mono (self-hosted)</td></tr>
+  <tr><td colspan="2">Motion</td><td colspan="5">Motion · Lenis smooth scroll · View Transitions</td></tr>
+  <tr><td colspan="2">3D</td><td colspan="5">Three.js graphite cube hero</td></tr>
+  <tr><td colspan="2">Routing &amp; UI</td><td colspan="5">React Router 7 · Radix Dialog · cmdk · Lucide</td></tr>
+  <tr><td colspan="2">Testing</td><td colspan="5">Vitest · Testing Library · Playwright (screenshots)</td></tr>
+  <tr><td colspan="2">Hosting</td><td colspan="5">Vercel</td></tr>
+</table>
 
 ## Inside
 
