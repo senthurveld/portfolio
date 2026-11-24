@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { services } from "@/content/site";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { services, site } from "@/content/site";
 import Contact from "@/routes/Contact";
 import { Lanes } from "@/sections/Services";
 
@@ -30,41 +30,102 @@ describe("Lanes accordion", () => {
 });
 
 describe("Contact form", () => {
-  it("prefills the topic from ?topic= and starts on step 2", () => {
-    at("/contact?topic=portfolio", <Contact />);
-    expect(screen.getByRole("radio", { name: "Full-time" })).toBeInTheDocument();
+  const whatsapp = site.whatsapp;
+  afterEach(() => {
+    site.whatsapp = whatsapp;
   });
 
-  it("blocks step 3 until name and email are valid, then opens mailto with the details", async () => {
+  /** Reason → About you (valid) → lands on Send via. */
+  async function fillToSendStep(user: ReturnType<typeof userEvent.setup>, reason: RegExp) {
+    await user.click(screen.getByRole("radio", { name: reason }));
+    await user.click(screen.getByRole("button", { name: /next/i }));
+    await user.type(await screen.findByLabelText("Name"), "Asha");
+    await user.type(screen.getByLabelText("Email"), "asha@example.com");
+    await user.type(screen.getByLabelText("Message"), "I need a five page site for my bakery.");
+    await user.click(screen.getByRole("button", { name: /next/i }));
+    await screen.findByText("Send it by");
+  }
+
+  it("maps an old ?topic= link to a reason + detail and starts on About you", async () => {
     const user = userEvent.setup();
-    const assign = vi.fn();
-    Object.defineProperty(window, "location", { value: { ...window.location, set href(v: string) { assign(v); } }, writable: true });
+    at("/contact?topic=portfolio", <Contact />);
+    expect(screen.getByLabelText("Name")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /back/i }));
+    expect(await screen.findByRole("radio", { name: /Freelance project/ })).toBeChecked();
+    expect(screen.getByRole("radio", { name: "Portfolio website" })).toBeChecked();
+  });
+
+  it("validates About you, then POSTs the email and shows the sent state", async () => {
+    const user = userEvent.setup();
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", fetchMock);
     at("/contact", <Contact />);
 
-    await user.click(screen.getByRole("radio", { name: "Business website" }));
+    await user.click(screen.getByRole("radio", { name: /Freelance project/ }));
+    await user.click(await screen.findByRole("radio", { name: "Business website" }));
     await user.click(screen.getByRole("button", { name: /next/i }));
-    await user.click(await screen.findByRole("radio", { name: "Freelance" }));
-    await user.click(screen.getByRole("button", { name: /next/i }));
-
     await screen.findByLabelText("Name");
     await user.click(screen.getByRole("button", { name: /next/i }));
     expect(await screen.findByText("Add your name.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Name")).toHaveFocus();
+    expect(screen.getByText(/20 characters minimum/)).toBeInTheDocument();
 
-    await user.type(await screen.findByLabelText("Name"), "Asha");
+    await user.type(screen.getByLabelText("Name"), "Asha");
     await user.type(screen.getByLabelText("Email"), "asha@example.com");
+    await user.type(screen.getByLabelText("Message"), "I need a five page site for my bakery.");
     await user.click(screen.getByRole("button", { name: /next/i }));
 
-    await user.type(await screen.findByLabelText("Message"), "Too short");
-    await user.click(screen.getByRole("button", { name: /send/i }));
-    expect(screen.getByText(/20 characters minimum/)).toBeInTheDocument();
-    expect(assign).not.toHaveBeenCalled();
+    // No WhatsApp number configured: Email is the only channel, already chosen.
+    await screen.findByText("Send it by");
+    expect(screen.queryByRole("radio", { name: /WhatsApp/ })).toBeNull();
+    await user.click(screen.getByRole("button", { name: /send email/i }));
 
-    await user.type(screen.getByLabelText("Message"), " — I need a five page site for my bakery.");
-    await user.click(screen.getByRole("button", { name: /send/i }));
-    expect(assign).toHaveBeenCalledOnce();
-    const href = decodeURIComponent(assign.mock.calls[0]![0] as string);
-    expect(href).toContain("Business website — Asha");
-    expect(href).toContain("Looking for: Freelance");
-    expect(screen.getByRole("status")).toHaveTextContent("Almost there");
+    expect(fetchMock).toHaveBeenCalledOnce();
+    const [url, init] = fetchMock.mock.calls[0]!;
+    expect(url).toBe("/api/contact");
+    const body = JSON.parse(init.body);
+    expect(body).toMatchObject({ reason: "freelance", detail: "Business website", channel: "email", name: "Asha", email: "asha@example.com", website: "" });
+    expect(typeof body.elapsed).toBe("number");
+    expect(await screen.findByRole("status")).toHaveTextContent("Sent.");
+  });
+
+  it("keeps the message and offers a mailto fallback when sending fails", async () => {
+    const user = userEvent.setup();
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 502 }));
+    at("/contact", <Contact />);
+    await fillToSendStep(user, /Hiring/);
+    await user.click(screen.getByRole("button", { name: /send email/i }));
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent("didn't go through");
+    expect(screen.getByRole("link", { name: "email me directly" }).getAttribute("href")).toMatch(/^mailto:/);
+    expect(screen.getByRole("button", { name: /try again/i })).toBeEnabled();
+    expect(screen.queryByRole("status")).toBeNull();
+  });
+
+  it("with a WhatsApp number, opens wa.me from a real link and copies the lead to the inbox", async () => {
+    site.whatsapp = "919876543210";
+    const user = userEvent.setup();
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true });
+    vi.stubGlobal("fetch", fetchMock);
+    at("/contact", <Contact />);
+    await fillToSendStep(user, /Just to connect/);
+
+    expect(screen.getByRole("button", { name: /^send$/i })).toBeDisabled();
+    await user.click(screen.getByRole("radio", { name: /WhatsApp/ }));
+    const link = screen.getByRole("link", { name: /open whatsapp/i });
+    const href = link.getAttribute("href")!;
+    expect(href.startsWith("https://wa.me/919876543210?text=")).toBe(true);
+    expect(decodeURIComponent(href)).toContain("I'm Asha.");
+    expect(link).toHaveAttribute("target", "_blank");
+
+    link.addEventListener("click", (e) => e.preventDefault()); // jsdom can't navigate
+    await user.click(link);
+    expect(fetchMock).toHaveBeenCalledOnce();
+    const init = fetchMock.mock.calls[0]![1];
+    expect(init.keepalive).toBe(true);
+    expect(JSON.parse(init.body)).toMatchObject({ reason: "hello", channel: "whatsapp" });
+    expect(await screen.findByRole("status")).toHaveTextContent("Sent.");
+    expect(screen.getByRole("link", { name: /didn't open/i })).toHaveAttribute("href", href);
   });
 });

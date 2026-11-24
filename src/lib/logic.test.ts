@@ -1,17 +1,22 @@
 import { describe, expect, it } from "vitest";
 import {
   contactMailto,
+  contactSubject,
+  contactSummary,
   cursorModeFor,
   istTime,
   navVisible,
   neighbours,
   real,
+  reasonFromParam,
   revealRadius,
   splitRows,
   stackDim,
   stackScale,
   validateContact,
+  whatsappLink,
   wrap,
+  type ContactDraft,
 } from "./logic";
 
 describe("real()", () => {
@@ -87,22 +92,77 @@ describe("validateContact()", () => {
   });
 });
 
+describe("validateContact() caps", () => {
+  it("rejects an over-long name or message", () => {
+    const e = validateContact({ name: "a".repeat(101), email: "a@b.co", message: "x".repeat(4001) });
+    expect(Object.keys(e).sort()).toEqual(["message", "name"]);
+  });
+});
+
+const draft = (over: Partial<ContactDraft> = {}): ContactDraft => ({
+  reason: "freelance",
+  detail: "Portfolio website",
+  timeline: "",
+  name: "Asha",
+  email: "a@b.co",
+  company: "",
+  message: "Hello there",
+  channel: "email",
+  ...over,
+});
+
+describe("contactSubject()", () => {
+  it("leads with the short reason tag and the filled follow-ups", () => {
+    expect(contactSubject(draft({ timeline: "ASAP", company: "Acme" }))).toBe("[Freelance · Portfolio website · ASAP] Asha (Acme)");
+    expect(contactSubject(draft({ reason: "hello", detail: "" }))).toBe("[Hello] Asha");
+  });
+  it("stays on one line (no header injection)", () => {
+    expect(contactSubject(draft({ name: "Asha\r\nBcc: x@y.z" }))).not.toMatch(/[\r\n]/);
+  });
+});
+
+describe("contactSummary()", () => {
+  it("lists reason, company and reply-to, then the message", () => {
+    const s = contactSummary(draft({ company: "Acme" }));
+    expect(s).toBe("Reason: Freelance project · Portfolio website\nCompany: Acme\nReply to: a@b.co\n\nHello there");
+    expect(contactSummary(draft())).not.toContain("Company");
+  });
+});
+
 describe("contactMailto()", () => {
-  it("encodes subject and body with every filled field", () => {
-    const href = contactMailto("me@x.co", {
-      topic: "Freelance project",
-      looking: "Landing page",
-      timeline: "",
-      name: "Asha",
-      email: "a@b.co",
-      company: "",
-      message: "Hello there",
-    });
-    expect(href.startsWith("mailto:me@x.co?subject=Freelance%20project%20%E2%80%94%20Asha&body=")).toBe(true);
-    const body = decodeURIComponent(href.split("body=")[1]!);
-    expect(body).toContain("Looking for: Landing page");
-    expect(body).not.toContain("Timeline");
-    expect(body).toContain("Hello there");
+  it("encodes the subject and the summary body", () => {
+    const href = contactMailto("me@x.co", draft());
+    expect(href.startsWith(`mailto:me@x.co?subject=${encodeURIComponent("[Freelance · Portfolio website] Asha")}&body=`)).toBe(true);
+    expect(decodeURIComponent(href.split("body=")[1]!)).toBe(contactSummary(draft()));
+  });
+});
+
+describe("whatsappLink()", () => {
+  it("strips the number to digits and encodes newlines and emoji", () => {
+    const href = whatsappLink("+91 98765-43210", draft({ message: "Hi 👋\nsecond line" }));
+    expect(href.startsWith("https://wa.me/919876543210?text=")).toBe(true);
+    expect(href).toContain("%0A");
+    const text = decodeURIComponent(href.split("text=")[1]!);
+    expect(text.startsWith("Hi Senthurvel, I'm Asha.\n\nReason: Freelance project")).toBe(true);
+    expect(text).toContain("Hi 👋\nsecond line");
+  });
+});
+
+describe("reasonFromParam()", () => {
+  it("maps every old ?topic= id and the new reason ids", () => {
+    expect(reasonFromParam("role")).toEqual(["hiring", ""]);
+    expect(reasonFromParam("internship")).toEqual(["hiring", "Internship"]);
+    expect(reasonFromParam("website")).toEqual(["freelance", "Business website"]);
+    expect(reasonFromParam("portfolio")).toEqual(["freelance", "Portfolio website"]);
+    expect(reasonFromParam("redesign")).toEqual(["freelance", "Redesign"]);
+    expect(reasonFromParam("freelance")).toEqual(["freelance", ""]);
+    expect(reasonFromParam("hello")).toEqual(["hello", ""]);
+    expect(reasonFromParam("hiring")).toEqual(["hiring", ""]);
+  });
+  it("ignores unknown and prototype keys", () => {
+    expect(reasonFromParam(null)).toBeNull();
+    expect(reasonFromParam("nope")).toBeNull();
+    expect(reasonFromParam("constructor")).toBeNull();
   });
 });
 

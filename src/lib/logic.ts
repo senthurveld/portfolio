@@ -1,5 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+// Relative + ".js": api/contact.ts imports this file, and Vercel's Node ESM runtime needs real paths.
+import { contact, site, type ContactChannel, type ContactReason } from "../content/site.js";
 
 export const cn = (...v: ClassValue[]) => twMerge(clsx(v));
 
@@ -47,33 +49,64 @@ export function cursorModeFor(target: Element | null): CursorMode {
 }
 
 export type ContactDraft = {
-  topic: string;
-  looking: string;
+  reason: ContactReason | "";
+  detail: string;
   timeline: string;
   name: string;
   email: string;
   company: string;
   message: string;
+  channel: ContactChannel | "";
 };
+
+export const CONTACT_MAX = { name: 100, email: 254, message: 4000 } as const;
 
 export function validateContact(d: Pick<ContactDraft, "name" | "email" | "message">) {
   const e: Partial<Record<"name" | "email" | "message", string>> = {};
-  if (!d.name.trim()) e.name = "Add your name.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim())) e.email = "Add an email I can reply to.";
-  if (d.message.trim().length < 20) e.message = "A few more words, please (20 characters minimum).";
+  const name = d.name.trim();
+  const email = d.email.trim();
+  const message = d.message.trim();
+  if (!name) e.name = "Add your name.";
+  else if (name.length > CONTACT_MAX.name) e.name = `Keep it under ${CONTACT_MAX.name} characters.`;
+  if (email.length > CONTACT_MAX.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Add an email I can reply to.";
+  if (message.length < 20) e.message = "A few more words, please (20 characters minimum).";
+  else if (message.length > CONTACT_MAX.message) e.message = `Keep it under ${CONTACT_MAX.message} characters.`;
   return e;
 }
 
+const reasonOf = (id: ContactDraft["reason"]) => contact.reasons.find((r) => r.id === id);
+
+/** "Freelance project · Portfolio website · ASAP" */
+export const contactReasonLine = (d: ContactDraft) => [reasonOf(d.reason)?.label ?? "Hello", d.detail, d.timeline].filter(Boolean).join(" · ");
+
+/** "[Freelance · Portfolio website] Asha (Acme)". One line, safe for a mail header. */
+export function contactSubject(d: ContactDraft) {
+  const tag = [reasonOf(d.reason)?.tag ?? "Hello", d.detail, d.timeline].filter(Boolean).join(" · ");
+  const who = d.company.trim() ? `${d.name.trim()} (${d.company.trim()})` : d.name.trim();
+  return `[${tag}] ${who}`.replace(/[\r\n]+/g, " ");
+}
+
+/** Plain-text body shared by WhatsApp, the mailto fallback and the owner email. */
+export function contactSummary(d: ContactDraft) {
+  const meta = [`Reason: ${contactReasonLine(d)}`, d.company.trim() && `Company: ${d.company.trim()}`, d.email.trim() && `Reply to: ${d.email.trim()}`].filter(Boolean);
+  return [...meta, "", d.message.trim()].join("\n");
+}
+
 export function contactMailto(to: string, d: ContactDraft) {
-  const subject = [d.topic || "Hello", d.name].filter(Boolean).join(" — ");
-  const meta = [
-    d.looking && `Looking for: ${d.looking}`,
-    d.timeline && `Timeline: ${d.timeline}`,
-    d.company && `Company: ${d.company}`,
-    d.email && `Reply to: ${d.email}`,
-  ].filter(Boolean) as string[];
-  const lines = meta.length ? [...meta, "", d.message] : [d.message];
-  return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  return `mailto:${to}?subject=${encodeURIComponent(contactSubject(d))}&body=${encodeURIComponent(contactSummary(d))}`;
+}
+
+export function whatsappLink(number: string, d: ContactDraft) {
+  const text = `Hi ${site.first}, I'm ${d.name.trim()}.\n\n${contactSummary(d)}`;
+  return `https://wa.me/${number.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+}
+
+/** ?topic= value (old topic ids or a reason id) to [reason, preselected detail]. */
+export function reasonFromParam(id: string | null): [ContactReason, string] | null {
+  if (!id) return null;
+  if (Object.hasOwn(contact.legacy, id)) return contact.legacy[id] ?? null;
+  const r = contact.reasons.find((x) => x.id === id);
+  return r ? [r.id, ""] : null;
 }
 
 export function neighbours<T extends { slug: string }>(list: T[], slug: string) {

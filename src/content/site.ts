@@ -18,6 +18,9 @@ export type Project = {
   featured: boolean;
 };
 
+export type ContactReason = "hiring" | "freelance" | "hello";
+export type ContactChannel = "email" | "whatsapp";
+
 export const site = {
   name: "Senthurvel D",
   first: "Senthurvel",
@@ -25,7 +28,9 @@ export const site = {
   roleShort: "Frontend developer (MERN)",
   city: "Coimbatore, India",
   email: "senthurveld2005@gmail.com",
-  url: "https://senthurveldz.vercel.app",
+  // WhatsApp: digits only with country code, no "+" (e.g. 919876543210). Bracketed = hidden.
+  whatsapp: "[WHATSAPP_NUMBER]",
+  url: "https://senthurdev.vercel.app",
   available: true,
   openTo: ["Chennai", "Bengaluru", "Remote"],
   pitch: "Fast, mobile-first React frontends for real clients, and the Node and MongoDB APIs behind them.",
@@ -363,10 +368,32 @@ export const contact = {
     { id: "freelance", label: "Freelance project" },
     { id: "hello", label: "Just saying hi" },
   ],
-  looking: ["Full-time", "Freelance", "Internship", "Not sure yet"],
+  // ?topic= ids above land on a reason, with a follow-up chip preselected.
+  legacy: {
+    role: ["hiring", ""],
+    internship: ["hiring", "Internship"],
+    website: ["freelance", "Business website"],
+    portfolio: ["freelance", "Portfolio website"],
+    redesign: ["freelance", "Redesign"],
+    freelance: ["freelance", ""],
+    hello: ["hello", ""],
+  } as Record<string, [ContactReason, string]>,
+  reasons: [
+    // tag = short email-subject prefix, e.g. "[Hiring] Asha", handy for Gmail filters.
+    { id: "hiring", tag: "Hiring", label: "Hiring", hint: "HR, recruiter, or a role on your team", ask: "The role, the team, and what the next step looks like.", detail: { legend: "Role (optional)", options: ["Full-time", "Internship", "Contract"] }, timeline: false },
+    { id: "freelance", tag: "Freelance", label: "Freelance project", hint: "A website, portfolio, or redesign", ask: "What are you building, and what do you need from me?", detail: { legend: "Project (optional)", options: ["Business website", "Portfolio website", "Redesign", "Something else"] }, timeline: true },
+    { id: "hello", tag: "Hello", label: "Just to connect", hint: "Say hi, ask something, talk shop", ask: "Say hi, ask anything.", detail: null, timeline: false },
+  ] satisfies { id: ContactReason; tag: string; label: string; hint: string; ask: string; detail: { legend: string; options: string[] } | null; timeline: boolean }[],
   timeline: ["ASAP", "Within a month", "1–3 months", "Flexible"],
-  steps: ["Topic", "Details", "About you", "Message"],
-  sent: "Your mail app should open with everything filled in. If it didn't, email me directly:",
+  steps: ["Reason", "About you", "Send via"],
+  channels: [
+    { id: "email", label: "Email", hint: "Lands in my inbox. You get a copy right away." },
+    { id: "whatsapp", label: "WhatsApp", hint: "Opens WhatsApp with your message ready. Just hit send." },
+  ] satisfies { id: ContactChannel; label: string; hint: string }[],
+  sent: {
+    email: "It's in my inbox, and a copy is on its way to yours.",
+    whatsapp: "WhatsApp should be open with your message ready. Hit send there and we're talking.",
+  } satisfies Record<ContactChannel, string>,
 };
 
 export const now = {
