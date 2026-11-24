@@ -1,0 +1,484 @@
+{
+  "thulir-media": {
+    "cover": {
+      "src": "/images/projects/thulir-media/cover-1920.webp",
+      "srcSet": "/images/projects/thulir-media/cover-640.webp 640w, /images/projects/thulir-media/cover-960.webp 960w, /images/projects/thulir-media/cover-1280.webp 1280w, /images/projects/thulir-media/cover-1920.webp 1920w",
+      "avif": "/images/projects/thulir-media/cover-640.avif 640w, /images/projects/thulir-media/cover-960.avif 960w, /images/projects/thulir-media/cover-1280.avif 1280w, /images/projects/thulir-media/cover-1920.avif 1920w",
+      "w": 1920,
+      "h": 1200,
+      "lqip": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAACwAQCdASoQAAoAAsBMJZQAAuQXH4AAAP76YkDEbwgfG0daqdlFwpeoozuNlVVk8XIqesp3jzP/L7/Flx1gcAAA"
+    },
+    "tall": {
+      "src": "/images/projects/thulir-media/tall-960.webp",
+      "srcSet": "/images/projects/thulir-media/tall-480.webp 480w, /images/projects/thulir-media/tall-720.webp 720w, /images/projects/thulir-media/tall-960.webp 960w",
+      "avif": "/images/projects/thulir-media/tall-480.avif 480w, /images/projects/thulir-media/tall-720.avif 720w, /images/projects/thulir-media/tall-960.avif 960w",
+      "w": 960,
+      "h": 1280,
+      "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQBACdASoQABUAPtFUo0uoJKMhsAgBABoJYwDA3CHfL4+myoC7rmSaAAD+8q5RPoNXZy0e3lP8b7MzmdowHz1f7KxSZQDytOOTBwbM21n1YVov9xmNAAAA"
+    },
+    "details": [
+      {
+        "src": "/images/projects/thulir-media/details-1-800.webp",
+        "srcSet": "/images/projects/thulir-media/details-1-400.webp 400w, /images/projects/thulir-media/details-1-640.webp 640w, /images/projects/thulir-media/details-1-800.webp 800w",
+        "avif": "/images/projects/thulir-media/details-1-400.avif 400w, /images/projects/thulir-media/details-1-640.avif 640w, /images/projects/thulir-media/details-1-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADwAQCdASoQABAAAsBMJYgCdADc8GaEAAAA/vkdALl5bprfjmWBxSyw13/PlrDxSM5t5JSfJ6uXkdU+0KpVZB3pMXmxxJ4mgrMiuzyXAw91YoWqm1qQpzAHgu46rWQHm88JnO7l87o+zQTfsGSayStpgAA="
+      },
+      {
+        "src": "/images/projects/thulir-media/details-2-800.webp",
+        "srcSet": "/images/projects/thulir-media/details-2-400.webp 400w, /images/projects/thulir-media/details-2-640.webp 640w, /images/projects/thulir-media/details-2-800.webp 800w",
+        "avif": "/images/projects/thulir-media/details-2-400.avif 400w, /images/projects/thulir-media/details-2-640.avif 640w, /images/projects/thulir-media/details-2-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQABAAAsBMJYwCdAEPDEh7vsNgAP76YbXga7d+u8GyXftCDaS/chnEd/D/5KwovEoXXyVjyCeXH7oAAAA="
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/images/projects/thulir-media/gallery-1-1600.webp",
+        "srcSet": "/images/projects/thulir-media/gallery-1-960.webp 960w, /images/projects/thulir-media/gallery-1-1600.webp 1600w",
+        "avif": "/images/projects/thulir-media/gallery-1-960.avif 960w, /images/projects/thulir-media/gallery-1-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADwAQCdASoQAAoAAsBMJZwAAudMinktFgAA/vn7uAncwlK3nDMWmjRA4AA=",
+        "alt": "Thulir Media intro, Every Frame Tells Your Story, with the studio's headline numbers"
+      },
+      {
+        "src": "/images/projects/thulir-media/gallery-2-1600.webp",
+        "srcSet": "/images/projects/thulir-media/gallery-2-960.webp 960w, /images/projects/thulir-media/gallery-2-1600.webp 1600w",
+        "avif": "/images/projects/thulir-media/gallery-2-960.avif 960w, /images/projects/thulir-media/gallery-2-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAoAAsBMJZQBTAA9EVGpveHYAP759Qq/tMRvQVkHrlQuLhsut+RhjAN1Ib1QmBZgWV3WGvPJQKNsOl01xCZkVcAAAA==",
+        "alt": "Wedding photography and videography section with a photo collage and service tags"
+      },
+      {
+        "src": "/images/projects/thulir-media/gallery-3-1600.webp",
+        "srcSet": "/images/projects/thulir-media/gallery-3-960.webp 960w, /images/projects/thulir-media/gallery-3-1600.webp 1600w",
+        "avif": "/images/projects/thulir-media/gallery-3-960.avif 960w, /images/projects/thulir-media/gallery-3-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAoAAsBMJZwAApK6eZ4IGAD++fW6n5AswycRsNnzKk2LZ50kZP47m/3VM5/JpOaoLZoAAAA=",
+        "alt": "Why choose Thulir Media: studio story beside a framed couple photo"
+      },
+      {
+        "src": "/images/projects/thulir-media/gallery-4-1600.webp",
+        "srcSet": "/images/projects/thulir-media/gallery-4-960.webp 960w, /images/projects/thulir-media/gallery-4-1600.webp 1600w",
+        "avif": "/images/projects/thulir-media/gallery-4-960.avif 960w, /images/projects/thulir-media/gallery-4-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAACQAQCdASoQAAoAAsBMJZwAApY3yAAA/vn8Gdd6udCdvgd+TYVUcYyT+hBJRS8UuuDup7dZJmCTgSGAAAA=",
+        "alt": "Thulir Media on mobile: hero, intro and wedding services"
+      }
+    ]
+  },
+  "medaac": {
+    "cover": {
+      "src": "/images/projects/medaac/cover-1920.webp",
+      "srcSet": "/images/projects/medaac/cover-640.webp 640w, /images/projects/medaac/cover-960.webp 960w, /images/projects/medaac/cover-1280.webp 1280w, /images/projects/medaac/cover-1920.webp 1920w",
+      "avif": "/images/projects/medaac/cover-640.avif 640w, /images/projects/medaac/cover-960.avif 960w, /images/projects/medaac/cover-1280.avif 1280w, /images/projects/medaac/cover-1920.avif 1920w",
+      "w": 1920,
+      "h": 1200,
+      "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoQAAoAAsBMJaQAD46wXQ+iEAD++dr0izsL8Pvl7/z8SsvqjNV5My5LyeIx7XmWzo63EgKnKM8FWsK+2OQqcFX8iZwQi2cAAAA="
+    },
+    "tall": {
+      "src": "/images/projects/medaac/tall-960.webp",
+      "srcSet": "/images/projects/medaac/tall-480.webp 480w, /images/projects/medaac/tall-720.webp 720w, /images/projects/medaac/tall-960.webp 960w",
+      "avif": "/images/projects/medaac/tall-480.avif 480w, /images/projects/medaac/tall-720.avif 720w, /images/projects/medaac/tall-960.avif 960w",
+      "w": 960,
+      "h": 1280,
+      "lqip": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAACQAwCdASoQABUAPtFUpEuoJKOhsAgBABoJZQAAXe66Fr7WVuFYAP7tDRwuaGIAz2L1CM4v8TBn/KHt6j74Apo/E3xLJe03tuMk3W+IqNVlkmub4DWsrKqhyriqL4bnXAu/7CxmwhSBRNbgBv+pFBjFS9DyZ0PM/PjJo0S/nuk/qfQA"
+    },
+    "details": [
+      {
+        "src": "/images/projects/medaac/details-1-800.webp",
+        "srcSet": "/images/projects/medaac/details-1-400.webp 400w, /images/projects/medaac/details-1-640.webp 640w, /images/projects/medaac/details-1-800.webp 800w",
+        "avif": "/images/projects/medaac/details-1-400.avif 400w, /images/projects/medaac/details-1-640.avif 640w, /images/projects/medaac/details-1-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAQAgCdASoQABAAAsBMJZQAAudm2t7a9SMAAP7eLlNHoy7sOmxasbZCBWLUj5WtgbBGlydPkd21UGzcRSbVQGHGKS4ewVAD66nyuS36h4MmRVt2kvGdOTsU28q7d8yLSOeXvufKmEvLl1MAAAA="
+      },
+      {
+        "src": "/images/projects/medaac/details-2-800.webp",
+        "srcSet": "/images/projects/medaac/details-2-400.webp 400w, /images/projects/medaac/details-2-640.webp 640w, /images/projects/medaac/details-2-800.webp 800w",
+        "avif": "/images/projects/medaac/details-2-400.avif 400w, /images/projects/medaac/details-2-640.avif 640w, /images/projects/medaac/details-2-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQABAAAsBMJZQAArP9cMo2CAAA/vplOxeLZzFsatOYcin7Vf87ArFw0E3Xl8oBYWvF+HxPoMbnB9Nph85lH8BRKF5mAAAA"
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/images/projects/medaac/gallery-1-1600.webp",
+        "srcSet": "/images/projects/medaac/gallery-1-960.webp 960w, /images/projects/medaac/gallery-1-1600.webp 1600w",
+        "avif": "/images/projects/medaac/gallery-1-960.avif 960w, /images/projects/medaac/gallery-1-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACwAQCdASoQAAoAAsBMJZwAAujA9rfgAP72/PjptrLaiRSDh20TFlLQy9glPCt+TlsIX7pID8N//ZDjW1CVjcqW4JhM+CHygU737+z6z7sAc9nPx9U+WoZbNAA=",
+        "alt": "Medaac mission section with a graduation photo and the trending-courses carousel"
+      },
+      {
+        "src": "/images/projects/medaac/gallery-2-1600.webp",
+        "srcSet": "/images/projects/medaac/gallery-2-960.webp 960w, /images/projects/medaac/gallery-2-1600.webp 1600w",
+        "avif": "/images/projects/medaac/gallery-2-960.avif 960w, /images/projects/medaac/gallery-2-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoQAAoAAsBMJYwCw7Efbjy3bVIA/t411VKedWCM6OCcfzhpvqZ5Vt4RU/hCgmrSNyE7atVXHTlb4PXdQoXvVNFI+eNWimmUMuH5qIfOrFiLPSwAmxjatsAA",
+        "alt": "Choose your preferred state: destination cards with flags"
+      },
+      {
+        "src": "/images/projects/medaac/gallery-3-1600.webp",
+        "srcSet": "/images/projects/medaac/gallery-3-960.webp 960w, /images/projects/medaac/gallery-3-1600.webp 1600w",
+        "avif": "/images/projects/medaac/gallery-3-960.avif 960w, /images/projects/medaac/gallery-3-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACwAQCdASoQAAoAAsBMJZwAAudLoBIAAP6Kcbz5jJansP9coOPrxLYbOO3AB4JpwjulP9XLaZg7utd4TkdUTAqJBo3I7SZW9DVPrlrnB50J1cytEAA=",
+        "alt": "Simplifying your admission journey: a three-step guide beside a student photo"
+      },
+      {
+        "src": "/images/projects/medaac/gallery-4-1600.webp",
+        "srcSet": "/images/projects/medaac/gallery-4-960.webp 960w, /images/projects/medaac/gallery-4-1600.webp 1600w",
+        "avif": "/images/projects/medaac/gallery-4-960.avif 960w, /images/projects/medaac/gallery-4-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwAgCdASoQAAoAAsBMJZwAD4VRaOC8rLGAAAD++V24aoHgAQZXEYy5/uSLUeZkb60xaomInkAhi+4B+3aPhh4x5R3y/rheVm5sz52yTW+L9gpSRG/jeY48UDwAAA==",
+        "alt": "Medaac on mobile: the hero, how-it-works steps with headline numbers, and the mission section"
+      }
+    ]
+  },
+  "bharathi-studio": {
+    "cover": {
+      "src": "/images/projects/bharathi-studio/cover-1920.webp",
+      "srcSet": "/images/projects/bharathi-studio/cover-640.webp 640w, /images/projects/bharathi-studio/cover-960.webp 960w, /images/projects/bharathi-studio/cover-1280.webp 1280w, /images/projects/bharathi-studio/cover-1920.webp 1920w",
+      "avif": "/images/projects/bharathi-studio/cover-640.avif 640w, /images/projects/bharathi-studio/cover-960.avif 960w, /images/projects/bharathi-studio/cover-1280.avif 1280w, /images/projects/bharathi-studio/cover-1920.avif 1920w",
+      "w": 1920,
+      "h": 1200,
+      "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQAgCdASoQAAoAAsBMJZACdAD0jWFdoqAAAP76dUr9uIF6BoV0bBj4vrW9L0wY/DLHUjgWNxTvxNV+khYPv3WoYmbmI90g6fI8iCaeBVNfy5WK2n98YqMFSnp3zlhfcQGxZfwAAAA="
+    },
+    "tall": {
+      "src": "/images/projects/bharathi-studio/tall-960.webp",
+      "srcSet": "/images/projects/bharathi-studio/tall-480.webp 480w, /images/projects/bharathi-studio/tall-720.webp 720w, /images/projects/bharathi-studio/tall-960.webp 960w",
+      "avif": "/images/projects/bharathi-studio/tall-480.avif 480w, /images/projects/bharathi-studio/tall-720.avif 720w, /images/projects/bharathi-studio/tall-960.avif 960w",
+      "w": 960,
+      "h": 1280,
+      "lqip": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADwAwCdASoQABUAPtFUo0uoJKMhsAgBABoJZgCdACHfI9yfxvEBFJEAAP7mmW9NaTG8g7J3guiMX1eykiln2UJfooPH8UsAxMqkcmw5JL4IgHIumS3uJWSx2mebxVEVAfvD7UeR43XCMd5KowitloXX2+JJ2mhIEFX8biC/xmubPuFyRTB8zK1sfaite8kf58rUfAY0pGSif/0ySKv7lIgAAAA="
+    },
+    "details": [
+      {
+        "src": "/images/projects/bharathi-studio/details-1-800.webp",
+        "srcSet": "/images/projects/bharathi-studio/details-1-400.webp 400w, /images/projects/bharathi-studio/details-1-640.webp 640w, /images/projects/bharathi-studio/details-1-800.webp 800w",
+        "avif": "/images/projects/bharathi-studio/details-1-400.avif 400w, /images/projects/bharathi-studio/details-1-640.avif 640w, /images/projects/bharathi-studio/details-1-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAAAwAgCdASoQABAAAsBMJbACdAYtzySia3yWMAD+wrMtmf2I4WeWgf9UXtg5whZ+/erbv1ReM0QonyQBkk/D2UP4r1ZhNpIPCHLWFi36H2OH+wJgCQ72c75U3UZFwc+BkK9EoU3Co5rGZ76ntkxI1FrNtF0UhzhpewUS3NfP7L7PF9jxr3sirzuUaqClwyGYfQxI1nlmqKQYrsi3NL8aRyPewAAAAA=="
+      },
+      {
+        "src": "/images/projects/bharathi-studio/details-2-800.webp",
+        "srcSet": "/images/projects/bharathi-studio/details-2-400.webp 400w, /images/projects/bharathi-studio/details-2-640.webp 640w, /images/projects/bharathi-studio/details-2-800.webp 800w",
+        "avif": "/images/projects/bharathi-studio/details-2-400.avif 400w, /images/projects/bharathi-studio/details-2-640.avif 640w, /images/projects/bharathi-studio/details-2-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAwAgCdASoQABAAAsBMJZQCdH8AFN7rm/TBsAD++mUSzI+U3dSRwp7M8TStpUfwDtTFhdWaewtC6jg0mfJBXoznDlRZb4h1ijT1AAAA"
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/images/projects/bharathi-studio/gallery-1-1600.webp",
+        "srcSet": "/images/projects/bharathi-studio/gallery-1-960.webp 960w, /images/projects/bharathi-studio/gallery-1-1600.webp 1600w",
+        "avif": "/images/projects/bharathi-studio/gallery-1-960.avif 960w, /images/projects/bharathi-studio/gallery-1-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoQAAoAAsBMJYgCdAEO94oZQAD+5vyUKBY9d+yy0vrysqhdqt02VbSkKz/gGahUbEVkomqJ23ZHVCKQdcpy5cG+yY0U9efm3m+zv94AAAA=",
+        "alt": "Bharathi Studio services: wedding, pre-wedding, puberty ceremony and birthday shoots"
+      },
+      {
+        "src": "/images/projects/bharathi-studio/gallery-2-1600.webp",
+        "srcSet": "/images/projects/bharathi-studio/gallery-2-960.webp 960w, /images/projects/bharathi-studio/gallery-2-1600.webp 1600w",
+        "avif": "/images/projects/bharathi-studio/gallery-2-960.avif 960w, /images/projects/bharathi-studio/gallery-2-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAABQAgCdASoQAAoAAsBMJQBOjatgWLc4ebdDwYAA/upc65ZOZufY7Nf0SsXjvQBMg6sVVMr1Tj+3hq/0xYf2S5DPmyItVmysNgdaX9cuPikIeGkEL0559dNE6U3HCDbDppNyEV/QrjCTAzgA",
+        "alt": "Photo gallery grid above the footer with contact details"
+      },
+      {
+        "src": "/images/projects/bharathi-studio/gallery-3-1600.webp",
+        "srcSet": "/images/projects/bharathi-studio/gallery-3-960.webp 960w, /images/projects/bharathi-studio/gallery-3-1600.webp 1600w",
+        "avif": "/images/projects/bharathi-studio/gallery-3-960.avif 960w, /images/projects/bharathi-studio/gallery-3-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADwAQCdASoQAAoAAsBMJQBOgCIASvzMDAAA/vipyBskRVZ61geXLTBYG2NIiTGGZ05eBzG7u0SypFL0Xm/of5pz4mCHjM5bn49bwd4Z5oFtnGttqDBow19CHeg0oAAA",
+        "alt": "Bharathi Studio on mobile: hero, a package and the gallery"
+      }
+    ]
+  },
+  "aswin-portfolio": {
+    "cover": {
+      "src": "/images/projects/aswin-portfolio/cover-1920.webp",
+      "srcSet": "/images/projects/aswin-portfolio/cover-640.webp 640w, /images/projects/aswin-portfolio/cover-960.webp 960w, /images/projects/aswin-portfolio/cover-1280.webp 1280w, /images/projects/aswin-portfolio/cover-1920.webp 1920w",
+      "avif": "/images/projects/aswin-portfolio/cover-640.avif 640w, /images/projects/aswin-portfolio/cover-960.avif 960w, /images/projects/aswin-portfolio/cover-1280.avif 1280w, /images/projects/aswin-portfolio/cover-1920.avif 1920w",
+      "w": 1920,
+      "h": 1200,
+      "lqip": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAoAAsBMJbACdAEQ/eEk8SaAAP76dUrWfxmGjBxiZDf1jpwdWkVMnXsVNjttVNfwlIPIaQoB8eIpH/De3ldI9E11j2vqz+w6svAHcQf+RjSZWx7xJX/QAAAAAA=="
+    },
+    "tall": {
+      "src": "/images/projects/aswin-portfolio/tall-960.webp",
+      "srcSet": "/images/projects/aswin-portfolio/tall-480.webp 480w, /images/projects/aswin-portfolio/tall-720.webp 720w, /images/projects/aswin-portfolio/tall-960.webp 960w",
+      "avif": "/images/projects/aswin-portfolio/tall-480.avif 480w, /images/projects/aswin-portfolio/tall-720.avif 720w, /images/projects/aswin-portfolio/tall-960.avif 960w",
+      "w": 960,
+      "h": 1280,
+      "lqip": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADQAwCdASoQABUAPtFUo0uoJKMhsAgBABoJZwAAW+zMxRnnJQkrL3wA/sKHmoQKg5XK6SJve3k8D5F1jlPPUn+Kbsm1lS9iCEeGHxIDyvkL0p/8Y1ch5v/xzUuZiBcjDd//oFsp7sSM9nvY9N46nK+JD9p/LEl3VXpj36pzF9H/p5vAWTG5Y2667IAAAA=="
+    },
+    "details": [
+      {
+        "src": "/images/projects/aswin-portfolio/details-1-800.webp",
+        "srcSet": "/images/projects/aswin-portfolio/details-1-400.webp 400w, /images/projects/aswin-portfolio/details-1-640.webp 640w, /images/projects/aswin-portfolio/details-1-800.webp 800w",
+        "avif": "/images/projects/aswin-portfolio/details-1-400.avif 400w, /images/projects/aswin-portfolio/details-1-640.avif 640w, /images/projects/aswin-portfolio/details-1-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAADQAgCdASoQABAAAsBMJbACdLoBEgHn/gyabgN56BbAAP7zY2H6l/XEare8poLGYlijJVXupt8cYlHx+3aGHtGXaFQyhI+8uBPHPGVKTOl5Ksb+LpP0+KbpaYp0KlDvlwJpDpi4tBh93R+bc+9K9mVruEB28xbHmB2ROlpAAAA="
+      },
+      {
+        "src": "/images/projects/aswin-portfolio/details-2-800.webp",
+        "srcSet": "/images/projects/aswin-portfolio/details-2-400.webp 400w, /images/projects/aswin-portfolio/details-2-640.webp 640w, /images/projects/aswin-portfolio/details-2-800.webp 800w",
+        "avif": "/images/projects/aswin-portfolio/details-2-400.avif 400w, /images/projects/aswin-portfolio/details-2-640.avif 640w, /images/projects/aswin-portfolio/details-2-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAwAgCdASoQABAAAsBMJZQCdAYrnzeXp2wbgAD++mJP8HzXbXoKshXfHaKXc9Pb5XcZcU+dbLdsNQJ5CEkKbwjp3+ZuHNsv7D2pBDfep/AAAA=="
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/images/projects/aswin-portfolio/gallery-1-1600.webp",
+        "srcSet": "/images/projects/aswin-portfolio/gallery-1-960.webp 960w, /images/projects/aswin-portfolio/gallery-1-1600.webp 1600w",
+        "avif": "/images/projects/aswin-portfolio/gallery-1-960.avif 960w, /images/projects/aswin-portfolio/gallery-1-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACwAQCdASoQAAoAAsBMJaQAAufdqAbAAP6KcbqeISmcefAm4YpdxzNfvSh5fgbJavj23W5nzV7JXuoVX+pOhmMVMpy3cyh+rjVssAAA",
+        "alt": "Aswin Kumar's about section: a word-by-word statement on shipping AI systems"
+      },
+      {
+        "src": "/images/projects/aswin-portfolio/gallery-2-1600.webp",
+        "srcSet": "/images/projects/aswin-portfolio/gallery-2-960.webp 960w, /images/projects/aswin-portfolio/gallery-2-1600.webp 1600w",
+        "avif": "/images/projects/aswin-portfolio/gallery-2-960.avif 960w, /images/projects/aswin-portfolio/gallery-2-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACwAQCdASoQAAoAAsBMJZwAAudh0ZSAAP6KcbeNZpiOlQqR1QdrcH7P2aaRPFNtGTtlUlu16FAg5LusfkZxLLllrVes5YOEGnFydu+qSMZymsNmM5eEAgAA",
+        "alt": "Selected work carousel with AI HR Assistant and Hazardous Waste Detection case-study cards"
+      },
+      {
+        "src": "/images/projects/aswin-portfolio/gallery-3-1600.webp",
+        "srcSet": "/images/projects/aswin-portfolio/gallery-3-960.webp 960w, /images/projects/aswin-portfolio/gallery-3-1600.webp 1600w",
+        "avif": "/images/projects/aswin-portfolio/gallery-3-960.avif 960w, /images/projects/aswin-portfolio/gallery-3-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAQCdASoQAAoAAsBMJZwAAufcQlIYAAD+rfF4u27SVVT0VLlMqfMZ5dxzNfvShj/VSl2yza0+mF1c7m6wctZtdM89gf87VG8lFoIIX5wm9L2ald3CAAAA",
+        "alt": "Contact section, Have something worth automating, beside the Write to me form"
+      },
+      {
+        "src": "/images/projects/aswin-portfolio/gallery-4-1600.webp",
+        "srcSet": "/images/projects/aswin-portfolio/gallery-4-960.webp 960w, /images/projects/aswin-portfolio/gallery-4-1600.webp 1600w",
+        "avif": "/images/projects/aswin-portfolio/gallery-4-960.avif 960w, /images/projects/aswin-portfolio/gallery-4-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAABQAgCdASoQAAoAAsBMJYwC7AYuvwPfwun/RQAA/vineydz23YvUB3uz5Qw1ZPrBDvRTwG5D++sQI7h7T0YL2wXU5Lt8MThntS3Y/xSF2+y7wPwKv0e5JHfJxcFuJrWh1dqLE6TGRvpEYAA",
+        "alt": "Aswin Kumar's portfolio on mobile: sky hero, a case-study card and the contact form"
+      }
+    ]
+  },
+  "dinesh-portfolio": {
+    "cover": {
+      "src": "/images/projects/dinesh-portfolio/cover-1920.webp",
+      "srcSet": "/images/projects/dinesh-portfolio/cover-640.webp 640w, /images/projects/dinesh-portfolio/cover-960.webp 960w, /images/projects/dinesh-portfolio/cover-1280.webp 1280w, /images/projects/dinesh-portfolio/cover-1920.webp 1920w",
+      "avif": "/images/projects/dinesh-portfolio/cover-640.avif 640w, /images/projects/dinesh-portfolio/cover-960.avif 960w, /images/projects/dinesh-portfolio/cover-1280.avif 1280w, /images/projects/dinesh-portfolio/cover-1920.avif 1920w",
+      "w": 1920,
+      "h": 1200,
+      "lqip": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAACwAQCdASoQAAoAAsBMJZwAAudMTGIgAP76XudZkEm1jZREH6b5yi6s0xT3DEHpsBoT2r0CLKV19meCuAA="
+    },
+    "tall": {
+      "src": "/images/projects/dinesh-portfolio/tall-960.webp",
+      "srcSet": "/images/projects/dinesh-portfolio/tall-480.webp 480w, /images/projects/dinesh-portfolio/tall-720.webp 720w, /images/projects/dinesh-portfolio/tall-960.webp 960w",
+      "avif": "/images/projects/dinesh-portfolio/tall-480.avif 480w, /images/projects/dinesh-portfolio/tall-720.avif 720w, /images/projects/dinesh-portfolio/tall-960.avif 960w",
+      "w": 960,
+      "h": 1280,
+      "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAACQAwCdASoQABUAPtFUo0uoJKMhsAgBABoJZwDDNB8xcuVKn51AAP7yyrfYvPl6BZs7DHmjmf/ugOU4QZ0FovPds2yxvPFE63IltFeC5USQHee2QZl/mDkEAAA="
+    },
+    "details": [
+      {
+        "src": "/images/projects/dinesh-portfolio/details-1-800.webp",
+        "srcSet": "/images/projects/dinesh-portfolio/details-1-400.webp 400w, /images/projects/dinesh-portfolio/details-1-640.webp 640w, /images/projects/dinesh-portfolio/details-1-800.webp 800w",
+        "avif": "/images/projects/dinesh-portfolio/details-1-400.avif 400w, /images/projects/dinesh-portfolio/details-1-640.avif 640w, /images/projects/dinesh-portfolio/details-1-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQABAAAsBMJZQC7AD6Eqc6lcAA/vnJE7cHU3uV/+E6tY+y0ncAnYOPP3l3CiPQz/hpX22CqlbhGJmLbnQvkSfOABACFGcAAAA="
+      },
+      {
+        "src": "/images/projects/dinesh-portfolio/details-2-800.webp",
+        "srcSet": "/images/projects/dinesh-portfolio/details-2-400.webp 400w, /images/projects/dinesh-portfolio/details-2-640.webp 640w, /images/projects/dinesh-portfolio/details-2-800.webp 800w",
+        "avif": "/images/projects/dinesh-portfolio/details-2-400.avif 400w, /images/projects/dinesh-portfolio/details-2-640.avif 640w, /images/projects/dinesh-portfolio/details-2-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoQABAAAsBMJZQCdAELYCwq+AD++ch6AlJU70kPiz/r8c3JPCgJ5RnZD2dxzAAA"
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/images/projects/dinesh-portfolio/gallery-1-1600.webp",
+        "srcSet": "/images/projects/dinesh-portfolio/gallery-1-960.webp 960w, /images/projects/dinesh-portfolio/gallery-1-1600.webp 1600w",
+        "avif": "/images/projects/dinesh-portfolio/gallery-1-960.avif 960w, /images/projects/dinesh-portfolio/gallery-1-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQAAoAAsBMJZQAAujfg2WOIAAA/vnHjkkRBs4JF0cxjuccRW8J3mNfP4PhOG7aH08VDJWtpG13Bp0QAAA=",
+        "alt": "Works showcase, Stories through edits and sound, above an autoplaying reel"
+      },
+      {
+        "src": "/images/projects/dinesh-portfolio/gallery-2-1600.webp",
+        "srcSet": "/images/projects/dinesh-portfolio/gallery-2-960.webp 960w, /images/projects/dinesh-portfolio/gallery-2-1600.webp 1600w",
+        "avif": "/images/projects/dinesh-portfolio/gallery-2-960.avif 960w, /images/projects/dinesh-portfolio/gallery-2-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAABQAQCdASoQAAoAAsBMJZwABAAAAP72HVeYVY329bWDl0oY1JgAAA==",
+        "alt": "Crafting stories: Dinesh's biography beside his experience timeline"
+      },
+      {
+        "src": "/images/projects/dinesh-portfolio/gallery-3-1600.webp",
+        "srcSet": "/images/projects/dinesh-portfolio/gallery-3-960.webp 960w, /images/projects/dinesh-portfolio/gallery-3-1600.webp 1600w",
+        "avif": "/images/projects/dinesh-portfolio/gallery-3-960.avif 960w, /images/projects/dinesh-portfolio/gallery-3-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAACQAQCdASoQAAoAAsBMJZwAAudFrAAA/vn0l7IMaU4GHrq1tigAAA==",
+        "alt": "What I use: tool grid with After Effects selected, its proficiency and uses"
+      },
+      {
+        "src": "/images/projects/dinesh-portfolio/gallery-4-1600.webp",
+        "srcSet": "/images/projects/dinesh-portfolio/gallery-4-960.webp 960w, /images/projects/dinesh-portfolio/gallery-4-1600.webp 1600w",
+        "avif": "/images/projects/dinesh-portfolio/gallery-4-960.avif 960w, /images/projects/dinesh-portfolio/gallery-4-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAoAAsBMJZwAAt0K7o9QAAD++fuznFfcYdCcfskGi9dvpFSt1cpwxCe0mvfXAgqAAA==",
+        "alt": "Dinesh R's portfolio on mobile: hero, showreel and biography, with the bottom dock nav"
+      }
+    ]
+  },
+  "musix": {
+    "cover": {
+      "src": "/images/projects/musix/cover-1920.webp",
+      "srcSet": "/images/projects/musix/cover-640.webp 640w, /images/projects/musix/cover-960.webp 960w, /images/projects/musix/cover-1280.webp 1280w, /images/projects/musix/cover-1920.webp 1920w",
+      "avif": "/images/projects/musix/cover-640.avif 640w, /images/projects/musix/cover-960.avif 960w, /images/projects/musix/cover-1280.avif 1280w, /images/projects/musix/cover-1920.avif 1920w",
+      "w": 1920,
+      "h": 1200,
+      "lqip": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoQAAoAAsBMJZQAAuc4kEGyAAD++l+BO1nkmUsFee7TOiSzCJoWZ+vP2v5k9xGYlAA="
+    },
+    "tall": {
+      "src": "/images/projects/musix/tall-960.webp",
+      "srcSet": "/images/projects/musix/tall-480.webp 480w, /images/projects/musix/tall-720.webp 720w, /images/projects/musix/tall-960.webp 960w",
+      "avif": "/images/projects/musix/tall-480.avif 480w, /images/projects/musix/tall-720.avif 720w, /images/projects/musix/tall-960.avif 960w",
+      "w": 960,
+      "h": 1280,
+      "lqip": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAACwAwCdASoQABUAPtFUo0uoJKMhsAgBABoJQAALffnYFFUN5zaH2AD+8Nlw9zf249Pfdbt6FtYdsDNrr7C/HN34/Q3T5XclMXqjATOsaNeW1zP2qBdGL1dlyH/MtAZClo0qNyaJZLDYQkgAAAA="
+    },
+    "details": [
+      {
+        "src": "/images/projects/musix/details-1-800.webp",
+        "srcSet": "/images/projects/musix/details-1-400.webp 400w, /images/projects/musix/details-1-640.webp 640w, /images/projects/musix/details-1-800.webp 800w",
+        "avif": "/images/projects/musix/details-1-400.avif 400w, /images/projects/musix/details-1-640.avif 640w, /images/projects/musix/details-1-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACwAQCdASoQABAAAsBMJZwAAxblckawAP75TOIlW/lCnIRQ7CkmHCOHPv4Xht61rmG1sp0t3//vKLmlkhW9IUIyAOjdgHByB1c/TdHCAAA="
+      },
+      {
+        "src": "/images/projects/musix/details-2-800.webp",
+        "srcSet": "/images/projects/musix/details-2-400.webp 400w, /images/projects/musix/details-2-640.webp 640w, /images/projects/musix/details-2-800.webp 800w",
+        "avif": "/images/projects/musix/details-2-400.avif 400w, /images/projects/musix/details-2-640.avif 640w, /images/projects/musix/details-2-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQABAAAsBMJQAAXRucdzSPYAD++ce96ClTUbBoOZzZxnxrUj/TgzG3mJQ/S55Rbs4QAA=="
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/images/projects/musix/gallery-1-1600.webp",
+        "srcSet": "/images/projects/musix/gallery-1-960.webp 960w, /images/projects/musix/gallery-1-1600.webp 1600w",
+        "avif": "/images/projects/musix/gallery-1-960.avif 960w, /images/projects/musix/gallery-1-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADwAQCdASoQAAoAAsBMJZwAAusojQ/90AAA/vn0c67tgypM782ly7hLQuJabtgZESBtollUVo/QkQ5adQgAAA==",
+        "alt": "Musix search for classical piano: source cards and Internet Archive results with audio players"
+      },
+      {
+        "src": "/images/projects/musix/gallery-2-1600.webp",
+        "srcSet": "/images/projects/musix/gallery-2-960.webp 960w, /images/projects/musix/gallery-2-1600.webp 1600w",
+        "avif": "/images/projects/musix/gallery-2-960.avif 960w, /images/projects/musix/gallery-2-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoQAAoAAsBMJaAAAudgVtBRQAD++VEyvwO9912v4wkXRu1Zy/lNMOnoW1kO3Mx7gAA=",
+        "alt": "Musix sign-up form with a live password strength checklist"
+      },
+      {
+        "src": "/images/projects/musix/gallery-3-1600.webp",
+        "srcSet": "/images/projects/musix/gallery-3-960.webp 960w, /images/projects/musix/gallery-3-1600.webp 1600w",
+        "avif": "/images/projects/musix/gallery-3-960.avif 960w, /images/projects/musix/gallery-3-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoQAAoAAsBMJYwAAudFYwc7KAAA/vn7s1FkN5HKlTVLjZLbLOcxX9UBp2xLNPdQE/12074A",
+        "alt": "Musix on mobile: log in, search results and sign-up"
+      }
+    ]
+  },
+  "country-explorer": {
+    "cover": {
+      "src": "/images/projects/country-explorer/cover-1920.webp",
+      "srcSet": "/images/projects/country-explorer/cover-640.webp 640w, /images/projects/country-explorer/cover-960.webp 960w, /images/projects/country-explorer/cover-1280.webp 1280w, /images/projects/country-explorer/cover-1920.webp 1920w",
+      "avif": "/images/projects/country-explorer/cover-640.avif 640w, /images/projects/country-explorer/cover-960.avif 960w, /images/projects/country-explorer/cover-1280.avif 1280w, /images/projects/country-explorer/cover-1920.avif 1920w",
+      "w": 1920,
+      "h": 1200,
+      "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQAAoAAsBMJZQC7AELW9j+u9AA/vplESjC23fAR7KQ3/45/GGmG8yGixcX8f7X4b72orLr6/mH9zATrAA="
+    },
+    "tall": {
+      "src": "/images/projects/country-explorer/tall-960.webp",
+      "srcSet": "/images/projects/country-explorer/tall-480.webp 480w, /images/projects/country-explorer/tall-720.webp 720w, /images/projects/country-explorer/tall-960.webp 960w",
+      "avif": "/images/projects/country-explorer/tall-480.avif 480w, /images/projects/country-explorer/tall-720.avif 720w, /images/projects/country-explorer/tall-960.avif 960w",
+      "w": 960,
+      "h": 1280,
+      "lqip": "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAAAQBACdASoQABUAPtFUo0uoJKMhsAgBABoJYwCsACPtzzmN79WkpFRN4AD+8OXCuH8laXJW329aOrnvjCX+maW/V0QCL/DxXzfJUGapwXSFsr2jUvWPFVn5D95PVWzETFZaZJKcJudHR9jSJsXZ9H4PZH3H4bcLZpCphAhAwAA="
+    },
+    "details": [
+      {
+        "src": "/images/projects/country-explorer/details-1-800.webp",
+        "srcSet": "/images/projects/country-explorer/details-1-400.webp 400w, /images/projects/country-explorer/details-1-640.webp 640w, /images/projects/country-explorer/details-1-800.webp 800w",
+        "avif": "/images/projects/country-explorer/details-1-400.avif 400w, /images/projects/country-explorer/details-1-640.avif 640w, /images/projects/country-explorer/details-1-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAQCdASoQABAAAsBMJQBOgCPQS5EJ90gA/vNmc+4cQjkhYSzm2CknbLFoQkfL/MY/JngFH/GKe8WqNNCCsRRvqcUYoptgYOH/2NdqUKRDA3o/FHvnnxgOQl0HTVVT6TR/TyYmAAA="
+      },
+      {
+        "src": "/images/projects/country-explorer/details-2-800.webp",
+        "srcSet": "/images/projects/country-explorer/details-2-400.webp 400w, /images/projects/country-explorer/details-2-640.webp 640w, /images/projects/country-explorer/details-2-800.webp 800w",
+        "avif": "/images/projects/country-explorer/details-2-400.avif 400w, /images/projects/country-explorer/details-2-640.avif 640w, /images/projects/country-explorer/details-2-800.avif 800w",
+        "w": 800,
+        "h": 800,
+        "lqip": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQABAAAsBMJYwCdAD0jvF4rMAA/vnI87cHJrPKU4PCvHrwLf8U/FTBLI9Eq8N3kiNFBCw8h579xLUTQAA="
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/images/projects/country-explorer/gallery-1-1600.webp",
+        "srcSet": "/images/projects/country-explorer/gallery-1-960.webp 960w, /images/projects/country-explorer/gallery-1-1600.webp 1600w",
+        "avif": "/images/projects/country-explorer/gallery-1-960.avif 960w, /images/projects/country-explorer/gallery-1-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADwAQCdASoQAAoAAsBMJYwCdAERGle40AAA/vb0NuD5P2wUKE1/nT+9cHny6Yb4P8my1W/w5Uu5lv+kQXfAkvFeiMAAAA==",
+        "alt": "Country Explorer showing Japan: flag, region, capital, population, language and timezone, with a Leaflet map"
+      },
+      {
+        "src": "/images/projects/country-explorer/gallery-2-1600.webp",
+        "srcSet": "/images/projects/country-explorer/gallery-2-960.webp 960w, /images/projects/country-explorer/gallery-2-1600.webp 1600w",
+        "avif": "/images/projects/country-explorer/gallery-2-960.avif 960w, /images/projects/country-explorer/gallery-2-1600.avif 1600w",
+        "w": 1600,
+        "h": 1000,
+        "lqip": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAoAAsBMJZwCdAYtpvtinigAAP75/BhirTMK5e3z7SSOmrzrh9ZN7Tb3vII0K3r5FAyDPTbVCXrzFm2xL36G/OC9RLagAAA=",
+        "alt": "Country Explorer on mobile: Japan, Brazil and Iceland"
+      }
+    ]
+  }
+}
