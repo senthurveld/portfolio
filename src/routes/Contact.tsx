@@ -217,7 +217,7 @@ export default function Contact() {
   const payload = (via: ContactChannel) =>
     JSON.stringify({ ...d, channel: via, website: trap, elapsed: Date.now() - startedAt.current, id: (submissionId.current ||= newSubmissionId()) });
 
-  // Slip tears off, button pops, paper bursts from the button, then the success card prints in.
+  // Slip tears off, button pops, confetti fills the form card, then the success card prints in.
   const celebrate = (via: ContactChannel) => {
     setSentVia(via);
     setFormHeight(formRef.current?.offsetHeight);
@@ -231,9 +231,9 @@ export default function Contact() {
       notify.success(via === "email" ? "Message sent" : "Copy saved", contact.sent[via]);
     };
     if (reduce) return done();
-    const r = (waRef.current ?? sendRef.current)?.getBoundingClientRect();
+    const r = formRef.current?.getBoundingClientRect();
     setTearing(true);
-    if (r) setTimeout(() => setBurst({ x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width }), 60);
+    if (r) setTimeout(() => setBurst({ left: r.left, top: r.top, width: r.width, height: r.height }), 60);
     setTimeout(done, 380);
   };
 
