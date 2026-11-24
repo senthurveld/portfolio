@@ -8,7 +8,7 @@
 
 **Frontend & MERN AI developer** · Coimbatore, India
 
-[**senthurveldz.vercel.app**](https://senthurveldz.vercel.app) &nbsp;·&nbsp;
+[**senthurdev.vercel.app**](https://senthurdev.vercel.app/) &nbsp;·&nbsp;
 [GitHub](https://github.com/senthurveld) &nbsp;·&nbsp;
 [LinkedIn](https://www.linkedin.com/in/senthurveld2005)
 
