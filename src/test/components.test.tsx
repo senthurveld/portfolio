@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryRouter, RouterProvider } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -13,8 +13,10 @@ beforeEach(() => {
   vi.stubGlobal("IntersectionObserver", class { observe() {} unobserve() {} disconnect() {} });
   vi.stubGlobal("matchMedia", (q: string) => ({ matches: q.includes("reduce"), media: q, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }));
   localStorage.clear();
+  sessionStorage.clear();
   vi.mocked(notify.success).mockClear();
   vi.mocked(notify.error).mockClear();
+  vi.mocked(notify.info).mockClear();
 });
 
 const at = (path: string, el: React.ReactElement) =>
@@ -34,7 +36,7 @@ describe("Lanes accordion", () => {
   });
 });
 
-describe("Contact form", () => {
+describe("Contact form", { timeout: 15_000 }, () => { // many keystrokes: slow when the suite runs in parallel
   const whatsapp = site.whatsapp;
   afterEach(() => {
     site.whatsapp = whatsapp;
@@ -111,6 +113,47 @@ describe("Contact form", () => {
     expect(notify.success).not.toHaveBeenCalled();
   });
 
+  it("retries with the same submission id, and a new one after an edit", async () => {
+    const user = userEvent.setup();
+    const fetchMock = vi.fn().mockRejectedValue(new TypeError("Failed to fetch"));
+    vi.stubGlobal("fetch", fetchMock);
+    at("/contact", <Contact />);
+    await fillToSendStep(user, /Hiring/);
+    await user.click(screen.getByRole("button", { name: /send email/i }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Check your connection");
+    await user.click(screen.getByRole("button", { name: /try again/i }));
+    await screen.findByRole("alert");
+    const ids = fetchMock.mock.calls.map((c) => JSON.parse(c[1].body).id);
+    expect(ids[0]).toMatch(/^[0-9a-f-]{36}$/);
+    expect(ids[1]).toBe(ids[0]);
+
+    await user.click(screen.getByRole("button", { name: /back/i }));
+    await user.type(await screen.findByLabelText("Message"), " More detail.");
+    await user.click(screen.getByRole("button", { name: /next/i }));
+    await user.click(await screen.findByRole("button", { name: /send email|try again/i }));
+    await screen.findByRole("alert");
+    expect(JSON.parse(fetchMock.mock.calls[2]![1].body).id).not.toBe(ids[0]);
+  });
+
+  it("says how long to wait when rate limited", async () => {
+    const user = userEvent.setup();
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 429, json: async () => ({ retryAfter: 420 }) }));
+    at("/contact", <Contact />);
+    await fillToSendStep(user, /Hiring/);
+    await user.click(screen.getByRole("button", { name: /send email/i }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Try again in 7 min");
+  });
+
+  it("shows the server's field errors back on About you", async () => {
+    const user = userEvent.setup();
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 400, json: async () => ({ errors: { email: "Add an email I can reply to." } }) }));
+    at("/contact", <Contact />);
+    await fillToSendStep(user, /Hiring/);
+    await user.click(screen.getByRole("button", { name: /send email/i }));
+    expect(await screen.findByText("Add an email I can reply to.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toHaveAttribute("aria-invalid", "true");
+    expect(screen.queryByRole("alert")).toBeNull();
+  });
   it("with a WhatsApp number, pre-picks WhatsApp for urgent freelance work", async () => {
     site.whatsapp = "919876543210";
     const user = userEvent.setup();
@@ -157,5 +200,52 @@ describe("Contact form", () => {
     expect(JSON.parse(init.body)).toMatchObject({ reason: "hello", channel: "whatsapp" });
     expect(await screen.findByRole("status")).toHaveTextContent("Sent.");
     expect(screen.getByRole("link", { name: /didn't open/i })).toHaveAttribute("href", href);
+  });
+});
+
+describe("Contact draft memory", { timeout: 15_000 }, () => {
+  const typed = async (user: ReturnType<typeof userEvent.setup>) => {
+    await user.click(screen.getByRole("radio", { name: /Hiring/ }));
+    await user.click(screen.getByRole("button", { name: /next/i }));
+    await user.type(await screen.findByLabelText("Name"), "Asha");
+  };
+
+  it("survives a reload in the same tab, never touches localStorage, and wipes old localStorage drafts", async () => {
+    localStorage.setItem("contact-draft-v2", JSON.stringify({ name: "Old visitor", email: "old@example.com" }));
+    const user = userEvent.setup();
+    const first = at("/contact", <Contact />);
+    expect(localStorage.getItem("contact-draft-v2")).toBeNull();
+    await typed(user);
+    first.unmount(); // = reload
+
+    at("/contact", <Contact />);
+    expect(await screen.findByLabelText("Name")).toHaveValue("Asha");
+    expect(localStorage.length).toBe(0);
+  });
+
+  it("drops a draft idle for more than 30 minutes, and anything malformed", async () => {
+    sessionStorage.setItem("contact-draft", JSON.stringify({ d: { reason: "hiring", name: "Asha" }, at: Date.now() - 31 * 60_000 }));
+    const { unmount } = at("/contact", <Contact />);
+    expect(screen.getByRole("radio", { name: /Hiring/ })).not.toBeChecked();
+    expect(sessionStorage.getItem("contact-draft")).toBeNull();
+    unmount();
+
+    sessionStorage.setItem("contact-draft", "{not json");
+    at("/contact", <Contact />);
+    expect(screen.getByRole("radio", { name: /Hiring/ })).not.toBeChecked();
+  });
+
+  it("Clear empties the form and storage, Undo brings it back", async () => {
+    const user = userEvent.setup();
+    at("/contact", <Contact />);
+    await typed(user);
+    await user.click(screen.getByRole("button", { name: /^clear$/i }));
+    expect(await screen.findByRole("radio", { name: /Hiring/ })).not.toBeChecked();
+    expect(sessionStorage.getItem("contact-draft")).toBeNull();
+
+    const [, , opts] = vi.mocked(notify.info).mock.calls[0]!;
+    act(() => opts!.action!.onClick());
+    expect(await screen.findByLabelText("Name")).toHaveValue("Asha");
+    expect(JSON.parse(sessionStorage.getItem("contact-draft")!).d.name).toBe("Asha");
   });
 });

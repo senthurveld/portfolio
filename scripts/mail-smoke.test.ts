@@ -14,6 +14,7 @@ it.runIf(process.env.npm_lifecycle_event === "mail:test")("sends the owner mail 
   const res = await POST(
     new Request("http://localhost/api/contact", {
       method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "http://localhost" },
       body: JSON.stringify({
         reason,
         detail: reason === "hiring" ? "Full-time" : reason === "freelance" ? "Business website" : "",

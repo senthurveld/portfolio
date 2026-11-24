@@ -1,5 +1,5 @@
 import { AnimatePresence, m, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Copy, Mail, MessageCircle, RotateCcw, type LucideIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Copy, Eraser, Mail, MessageCircle, RotateCcw, type LucideIcon } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { useSearchParams } from "react-router";
@@ -7,20 +7,59 @@ import { FadeIn } from "@/components/FadeIn";
 import { PageHeader } from "@/components/PageHeader";
 import { PaperBurst, type BurstOrigin } from "@/components/PaperBurst";
 import { contact, site, type ContactChannel, type ContactReason } from "@/content/site";
-import { CONTACT_MAX, cn, contactMailto, contactReasonLine, real, reasonFromParam, suggestChannel, validateContact, whatsappLink, type ContactDraft } from "@/lib/logic";
+import { newSubmissionId, sendContact, type SendResult } from "@/lib/contactApi";
+import {
+  CONTACT_MAX,
+  EMPTY_DRAFT,
+  cn,
+  contactMailto,
+  contactReasonLine,
+  isDraftEmpty,
+  real,
+  reasonFromParam,
+  restoreDraft,
+  suggestChannel,
+  validateContact,
+  whatsappLink,
+  type ContactDraft,
+} from "@/lib/logic";
 import { notify } from "@/lib/toast";
 import { LocalTime } from "./Now";
 
-const KEY = "contact-draft-v2";
-const empty: ContactDraft = { reason: "", detail: "", timeline: "", name: "", email: "", company: "", message: "", channel: "" };
 const EASE = [0.22, 1, 0.36, 1] as const;
+
+// Draft memory: this tab only (sessionStorage), so an accidental reload doesn't lose a message, but it's
+// gone when the tab closes, after 30 min idle (DRAFT_TTL), on send, or via Clear. Never in localStorage:
+// on a shared computer the next person shouldn't find your name, email and message.
+const DRAFT_KEY = "contact-draft";
+const LEGACY_KEY = "contact-draft-v2"; // older builds kept the draft in localStorage with no expiry
 
 function loadDraft(): ContactDraft {
   try {
-    return { ...empty, ...JSON.parse(localStorage.getItem(KEY) ?? "{}") };
+    localStorage.removeItem(LEGACY_KEY);
   } catch {
-    return empty;
+    /* storage blocked */
   }
+  try {
+    const restored = restoreDraft(JSON.parse(sessionStorage.getItem(DRAFT_KEY) ?? "null"), Date.now());
+    if (!restored) sessionStorage.removeItem(DRAFT_KEY);
+    return restored ?? EMPTY_DRAFT;
+  } catch {
+    return EMPTY_DRAFT;
+  }
+}
+
+function saveDraft(d: ContactDraft) {
+  try {
+    if (isDraftEmpty(d) && !d.reason) sessionStorage.removeItem(DRAFT_KEY);
+    else sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ d, at: Date.now() }));
+  } catch {
+    /* storage blocked or full: the form still works, it just won't survive a reload */
+  }
+}
+
+function failText(r: Exclude<SendResult, { ok: true } | { kind: "invalid" }>) {
+  return r.kind === "rate" ? contact.failed.rate.replace("{min}", String(Math.max(1, Math.ceil(r.retryAfter / 60)))) : contact.failed[r.kind];
 }
 
 function Chips({ legend, options, value, onChange }: { legend: string; options: string[]; value: string; onChange: (v: string) => void }) {
@@ -124,6 +163,7 @@ export default function Contact() {
   const [step, setStep] = useState(() => (d.reason ? 1 : 0));
   const [errors, setErrors] = useState<ReturnType<typeof validateContact>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "error" | "sent">("idle");
+  const [failure, setFailure] = useState("");
   const [sentVia, setSentVia] = useState<ContactChannel>("email");
   const [tearing, setTearing] = useState(false);
   const [burst, setBurst] = useState<BurstOrigin | null>(null);
@@ -134,17 +174,16 @@ export default function Contact() {
   const sendRef = useRef<HTMLButtonElement>(null);
   const waRef = useRef<HTMLAnchorElement>(null);
   const sentRef = useRef<HTMLHeadingElement>(null);
+  const submissionId = useRef("");
 
   useEffect(() => {
     startedAt.current = Date.now();
   }, []);
 
+  // Any edit makes it a new submission; a plain retry keeps the id so the server can drop a duplicate.
   useEffect(() => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(d));
-    } catch {
-      /* storage blocked */
-    }
+    saveDraft(d);
+    submissionId.current = "";
   }, [d]);
 
   useEffect(() => {
@@ -175,14 +214,15 @@ export default function Contact() {
     setStep((s) => Math.min(last, s + 1));
   };
 
-  const payload = (via: ContactChannel) => JSON.stringify({ ...d, channel: via, website: trap, elapsed: Date.now() - startedAt.current });
+  const payload = (via: ContactChannel) =>
+    JSON.stringify({ ...d, channel: via, website: trap, elapsed: Date.now() - startedAt.current, id: (submissionId.current ||= newSubmissionId()) });
 
   // Slip tears off, button pops, paper bursts from the button, then the success card prints in.
   const celebrate = (via: ContactChannel) => {
     setSentVia(via);
     setFormHeight(formRef.current?.offsetHeight);
     try {
-      localStorage.removeItem(KEY);
+      sessionStorage.removeItem(DRAFT_KEY);
     } catch {
       /* ignore */
     }
@@ -204,20 +244,46 @@ export default function Contact() {
     if (channel !== "email" || status === "sending") return;
     if (!check()) return setStep(1);
     setStatus("sending");
-    try {
-      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload("email") });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      celebrate("email");
-    } catch {
-      setStatus("error");
-      notify.error("Couldn't send", "Your message is still here. Try again, or email me directly.");
+    setFailure("");
+    const r = await sendContact(payload("email"));
+    if (r.ok) return celebrate("email");
+    if (r.kind === "invalid") {
+      // Server disagrees with the browser's checks: show its field errors where they belong.
+      setStatus("idle");
+      setErrors(r.errors);
+      setStep(1);
+      notify.error("Check the highlighted fields", "Something in About you needs a fix.");
+      return;
     }
+    const text = failText(r);
+    setFailure(text);
+    setStatus("error");
+    notify.error("Couldn't send", text);
   };
 
   // The link itself opens WhatsApp (no popup blocker). This only drops a copy in my inbox.
   const onWhatsApp = () => {
-    fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload("whatsapp"), keepalive: true }).catch(() => {});
+    void sendContact(payload("whatsapp"), { keepalive: true });
     celebrate("whatsapp");
+  };
+
+  const clearForm = () => {
+    const before = { d, step };
+    setD(EMPTY_DRAFT);
+    setStep(0);
+    setErrors({});
+    setStatus("idle");
+    setFailure("");
+    notify.info("Form cleared", "Nothing is saved in this browser now.", {
+      icon: Eraser,
+      action: {
+        label: "Undo",
+        onClick: () => {
+          setD(before.d);
+          setStep(before.step);
+        },
+      },
+    });
   };
 
   const copy = async () => {
@@ -398,7 +464,7 @@ export default function Contact() {
               <div role="alert" className="mt-8 rounded-2xl border border-[#ff8a8a]/50 p-5 text-sm">
                 <p className="font-semibold">That didn't go through.</p>
                 <p className="mt-1 text-[var(--home-muted)]">
-                  Your message is still here. Try again, or{" "}
+                  {failure} Or{" "}
                   <a href={contactMailto(site.email, d)} className="underline-grow font-medium text-[var(--home-fg)]">
                     email me directly
                   </a>
@@ -408,9 +474,16 @@ export default function Contact() {
             )}
 
             <div className="mt-10 flex items-center justify-between gap-4">
-              <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0 || status === "sending"} className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold tracking-[0.2em] uppercase disabled:invisible">
-                <ArrowLeft className="size-4" /> Back
-              </button>
+              <div className="flex items-center gap-1">
+                <button type="button" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0 || status === "sending"} className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold tracking-[0.2em] uppercase disabled:hidden">
+                  <ArrowLeft className="size-4" /> Back
+                </button>
+                {(d.reason || !isDraftEmpty(d)) && status !== "sending" && (
+                  <button type="button" onClick={clearForm} className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-semibold tracking-[0.2em] text-[var(--home-dim)] uppercase transition-colors hover:text-[var(--home-fg)]">
+                    Clear
+                  </button>
+                )}
+              </div>
               {step === last && channel === "whatsapp" ? (
                 <m.a ref={waRef} href={waHref} target="_blank" rel="noopener noreferrer" onClick={onWhatsApp} animate={pop} transition={{ duration: 0.45, ease: EASE }} className={primary}>
                   Open WhatsApp

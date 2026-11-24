@@ -396,6 +396,13 @@ export const contact = {
     urgent: "You need it ASAP, so WhatsApp is the fastest way to get started.",
     other: "Email keeps it all in one thread, with a copy in your inbox.",
   },
+  // Why a send failed, shown in the form and the toast. {min} = minutes until they can send again.
+  failed: {
+    offline: "Couldn't reach the server. Check your connection, then try again.",
+    timeout: "The server took too long to answer. Try again in a moment.",
+    server: "Something broke on my side. Your message is still here, so try again.",
+    rate: "That's a lot of messages from this connection. Try again in {min} min.",
+  },
   sent: {
     email: "It's in my inbox, and a copy is on its way to yours.",
     whatsapp: "WhatsApp should be open with your message ready. Hit send there and we're talking.",

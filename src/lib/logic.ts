@@ -61,6 +61,10 @@ export type ContactDraft = {
 
 export const CONTACT_MAX = { name: 100, email: 254, message: 4000 } as const;
 
+// WHATWG <input type="email"> grammar, plus a dot in the domain. No commas, quotes, spaces or angle
+// brackets, so an address can never smuggle a second recipient into a mail header.
+const EMAIL = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
 export function validateContact(d: Pick<ContactDraft, "name" | "email" | "message">) {
   const e: Partial<Record<"name" | "email" | "message", string>> = {};
   const name = d.name.trim();
@@ -68,13 +72,49 @@ export function validateContact(d: Pick<ContactDraft, "name" | "email" | "messag
   const message = d.message.trim();
   if (!name) e.name = "Add your name.";
   else if (name.length > CONTACT_MAX.name) e.name = `Keep it under ${CONTACT_MAX.name} characters.`;
-  if (email.length > CONTACT_MAX.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Add an email I can reply to.";
+  if (email.length > CONTACT_MAX.email || !EMAIL.test(email)) e.email = "Add an email I can reply to.";
   if (message.length < 20) e.message = "A few more words, please (20 characters minimum).";
   else if (message.length > CONTACT_MAX.message) e.message = `Keep it under ${CONTACT_MAX.message} characters.`;
   return e;
 }
 
 const reasonOf = (id: ContactDraft["reason"]) => contact.reasons.find((r) => r.id === id);
+
+export const EMPTY_DRAFT: ContactDraft = { reason: "", detail: "", timeline: "", name: "", email: "", company: "", message: "", channel: "" };
+/** Idle time after which a saved draft is dropped. */
+export const DRAFT_TTL = 30 * 60_000;
+const DRAFT_CAP: Record<keyof ContactDraft, number> = { reason: 20, detail: 60, timeline: 60, name: CONTACT_MAX.name, email: CONTACT_MAX.email, company: 100, message: CONTACT_MAX.message, channel: 20 };
+
+export const isDraftEmpty = (d: ContactDraft) => !d.name.trim() && !d.email.trim() && !d.company.trim() && !d.message.trim();
+
+/**
+ * Rebuilds a draft from storage. Storage is user-writable, so nothing is trusted: unknown keys are dropped,
+ * values must be strings and are capped, ids must be real, and a draft idle past DRAFT_TTL is discarded.
+ */
+export function restoreDraft(raw: unknown, now: number): ContactDraft | null {
+  if (!raw || typeof raw !== "object") return null;
+  const { d, at } = raw as { d?: unknown; at?: unknown };
+  if (typeof at !== "number" || !(now - at >= 0 && now - at < DRAFT_TTL) || !d || typeof d !== "object") return null;
+  const src = d as Record<string, unknown>;
+  const out = { ...EMPTY_DRAFT };
+  for (const k of Object.keys(EMPTY_DRAFT) as (keyof ContactDraft)[]) {
+    const v = src[k];
+    if (typeof v === "string") (out as Record<string, string>)[k] = v.slice(0, DRAFT_CAP[k]);
+  }
+  if (!contact.reasons.some((r) => r.id === out.reason)) out.reason = "";
+  if (!contact.channels.some((c) => c.id === out.channel)) out.channel = "";
+  return out;
+}
+
+/**
+ * First name for a greeting that goes to an address anyone can type in. Anything that could render as a
+ * link or look like an address ("evil.com", "x@y", "http://") falls back to "there", so the auto-reply
+ * can't be used to deliver someone else's link.
+ */
+export function greetName(name: string) {
+  const first = name.trim().split(/\s+/)[0] ?? "";
+  return first && first.length <= 30 && !/[.:/@\\<>]/.test(first) ? first : "there";
+}
 
 /** "Freelance project · Portfolio website · ASAP" */
 export const contactReasonLine = (d: ContactDraft) => [reasonOf(d.reason)?.label ?? "Hello", d.detail, d.timeline].filter(Boolean).join(" · ");
